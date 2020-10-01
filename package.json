@@ -2,7 +2,7 @@
     "name": "vue-dk-toast",
     "version": "0.1.2",
     "private": false,
-    "main": "./dist/dkToast.umd.min.js",
+    "main": "/dist/dkToast.umd.min.js",
     "scripts": {
         "serve": "vue-cli-service serve",
         "lint": "vue-cli-service lint",
