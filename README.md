@@ -1,6 +1,6 @@
 # vue-dk-toast
 
-Lightweight toast-notification plugin for Vue3
+Lightweight toast-notification plugin for Vue3.
 
 ## Install
 
