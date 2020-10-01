@@ -26,6 +26,10 @@ createApp(App)
 this.$toast('Simple!');
 ```
 
+```js
+@click="$toast('Simple!')"
+```
+
 ## Options
 
 ```js
