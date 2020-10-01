@@ -59,11 +59,13 @@ export default {
 				}
 				.dk__toast {
 					margin: 5px 0;
-					padding: 5px 20px;
-					font: clamp(0.9rem, 1.5vw, 1.3rem) Avenir, sans-serif;
+                    padding: 5px 20px;
+                    min-width: 150px;
+					font: clamp(0.9rem, 1.5vw, 1.2rem) Avenir, sans-serif;
 					text-align: center;
 					border-radius: 25px;
-					border: 1px solid #000;
+                    border: 1px solid #000;
+                    background: #fff;
 					box-shadow: 0 1px 3px #000;
 					animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${options.duration / 1000 -
                         0.15}s reverse forwards;
