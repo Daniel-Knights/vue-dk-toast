@@ -1,26 +1,26 @@
 <template>
-	<button @click="toast()">Create Element</button>
+    <button @click="toast()">Create Element</button>
 </template>
 
 <script>
 export default {
-	name: 'App',
+    name: 'App',
 
-	methods: {
-		toast() {
-			this.$toast('Unable to login');
-		},
-	},
+    methods: {
+        toast() {
+            this.$toast('Unable to login');
+        },
+    },
 };
 </script>
 
 <style>
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
 </style>

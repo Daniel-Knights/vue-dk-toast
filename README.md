@@ -1,24 +1,42 @@
-# vue-dk-toasted
+# vue-dk-toast
 
-## Project setup
-```
-npm install
-```
+## Install
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+```bash
+npm i vue-dk-toast
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+## Import
+
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import DKToast from 'vue-dk-toast';
+
+createApp(App)
+	.use(DKToast)
+	.mount('#app');
 ```
 
-### Lints and fixes files
-```
-npm run lint
+## Usage
+
+```js
+this.$toast('Simple!');
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Options
+
+```js
+createApp(App)
+	.use(DKToast, {
+		duration: 5000,
+		positionY: 'bottom', // 'top' or 'bottom'
+		positionX: 'right', // 'right' or 'left'
+		styles: {
+			color: '#000',
+			backgroundColor: '#fff',
+			// Vendor prefixes also supported
+		},
+	})
+	.mount('#app');
+```
