@@ -3,6 +3,7 @@ export default {
         let properties, error;
 
         // Set defaults
+        if (!options) options = {};
         if (!options.duration) options.duration = 5000;
         if (!options.positionY) options.positionY = 'bottom';
         if (!options.positionX) options.positionX = 'right';
@@ -51,7 +52,7 @@ export default {
 				.dk__toast-container {
 					display: flex;
 					flex-direction: column;
-					position: absolute;
+					position: fixed;
 					${options.positionY}: 40px;
 					${options.positionX}: 60px;
 					z-index: 100;
