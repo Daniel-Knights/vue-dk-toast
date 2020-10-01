@@ -60,7 +60,7 @@ export default {
 				.dk__toast {
 					margin: 5px 0;
                     padding: 5px 20px;
-                    min-width: 150px;
+                    min-width: 125px;
 					font: clamp(0.9rem, 1.5vw, 1.2rem) Avenir, sans-serif;
 					text-align: center;
 					border-radius: 25px;
