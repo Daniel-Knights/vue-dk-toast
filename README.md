@@ -46,3 +46,14 @@ createApp(App)
     })
     .mount('#app');
 ```
+
+## Local Options
+
+```js
+this.$toast('Simple!', {
+    duration: 1000,
+    styles: {
+        borderRadius: '25px',
+    },
+});
+```
