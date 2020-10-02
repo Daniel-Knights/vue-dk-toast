@@ -43,6 +43,7 @@ export const appendStylesheet = options => {
                 z-index: 100;
             }
             .dk__toast {
+                cursor: pointer;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -55,7 +56,11 @@ export const appendStylesheet = options => {
                 border-radius: 5px;
                 background: #fff;
                 box-shadow: 0 1px 3px #000;
+                transition: opacity 0.25s;
                 ${properties || ''}
+            }
+            .dk__toast:hover {
+                opacity: 0.7;
             }
             .dk__toast span,
             .dk__toast i {
