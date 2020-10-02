@@ -16,7 +16,7 @@ const renderToast = (app, options) => {
     // Render individual toast
     const DKToast = (text, localOptions) => {
         const toast = document.createElement('div');
-        let duration;
+        let duration, clicked;
 
         if (!localOptions) localOptions = {};
         if (!text && !localOptions.slot)
@@ -25,14 +25,23 @@ const renderToast = (app, options) => {
         toast.innerHTML = text;
         if (localOptions.slot) toast.innerHTML += localOptions.slot;
         toast.className = 'dk__toast';
+        if (!text && localOptions.slot) toast.classList.add('dk__icon-only');
 
         // Set custom local styles
         duration = localOptions.duration ? localOptions.duration : options.duration;
         if (localOptions.styles)
             toast.setAttribute('style', formatCssProperties(localOptions.styles, duration));
 
+        // Remove toast on click
+        toast.addEventListener('click', () => {
+            clicked = true;
+            container.removeChild(toast);
+        });
+
         container.appendChild(toast);
-        setTimeout(() => container.removeChild(toast), duration);
+        setTimeout(() => {
+            if (!clicked) container.removeChild(toast);
+        }, duration);
     };
 
     app.config.globalProperties.$toast = DKToast;

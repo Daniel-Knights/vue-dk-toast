@@ -8,7 +8,7 @@ export default {
 
     methods: {
         toast() {
-            this.$toast('Unable to complete signup', {
+            this.$toast('', {
                 duration: 10000,
                 styles: {},
                 slot: '<span class="material-icons">thumb_up</span>',
@@ -26,6 +26,7 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    height: 1000vh;
 }
 
 input,

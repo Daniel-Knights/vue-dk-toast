@@ -64,6 +64,15 @@ export const appendStylesheet = options => {
                 padding: 5px;
                 font-size: 16px;
             }
+            .dk__icon-only {
+                padding: 7px 0;
+                width: fit-content;
+            }
+            .dk__icon-only i,
+            .dk__icon-only span {
+                position: relative;
+                right: unset;
+            }
             @keyframes dk__toast-in {
                 from {
                     transform: translateY(100%);
@@ -84,6 +93,10 @@ export const appendStylesheet = options => {
                 }
                 .dk__toast {
                     padding: 7px 30px;
+                }
+                .dk__icon-only {
+                    width: 70%;
+                    margin: 5px auto;
                 }
             }
         `;
