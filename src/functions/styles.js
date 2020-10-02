@@ -43,6 +43,9 @@ export const appendStylesheet = options => {
                 z-index: 100;
             }
             .dk__toast {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 margin: 5px 0;
                 padding: 5px 20px;
                 min-width: 125px;
