@@ -48,9 +48,9 @@ export const appendStylesheet = options => {
                 align-items: center;
                 position: relative;
                 margin: 5px 0;
-                padding: 5px 45px;
+                padding: 7px 45px;
                 min-width: 100px;
-                font: clamp(0.9rem, 1.5vw, 1.2rem) Avenir, sans-serif;
+                font: 17px Avenir, sans-serif;
                 text-align: center;
                 border-radius: 5px;
                 background: #fff;
@@ -83,8 +83,7 @@ export const appendStylesheet = options => {
                     width: 90%;
                 }
                 .dk__toast {
-                    padding: 5px 30px;
-                    font-size: 14px;
+                    padding: 7px 30px;
                 }
             }
         `;
