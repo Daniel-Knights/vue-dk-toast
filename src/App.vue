@@ -6,20 +6,12 @@
 export default {
     name: 'App',
 
-    data() {
-        return {
-            duration: 1000,
-            text: '',
-            slot: '',
-        };
-    },
-
     methods: {
         toast() {
-            this.$toast('hello', {
-                duration: 1000,
+            this.$toast('Unable to complete signup', {
+                duration: 10000,
                 styles: {},
-                slot: '',
+                slot: '<span class="material-icons">thumb_up</span>',
             });
         },
     },

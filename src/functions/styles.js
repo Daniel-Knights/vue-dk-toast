@@ -46,15 +46,23 @@ export const appendStylesheet = options => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                position: relative;
                 margin: 5px 0;
-                padding: 5px 20px;
-                min-width: 125px;
+                padding: 5px 45px;
+                min-width: 100px;
                 font: clamp(0.9rem, 1.5vw, 1.2rem) Avenir, sans-serif;
                 text-align: center;
                 border-radius: 5px;
                 background: #fff;
                 box-shadow: 0 1px 3px #000;
                 ${properties || ''}
+            }
+            .dk__toast span,
+            .dk__toast i {
+                position: absolute;
+                right: 10px;
+                padding: 5px;
+                font-size: 16px;
             }
             @keyframes dk__toast-in {
                 from {
@@ -73,6 +81,10 @@ export const appendStylesheet = options => {
                     bottom: 10px;
                     margin: 0 auto;
                     width: 90%;
+                }
+                .dk__toast {
+                    padding: 5px 30px;
+                    font-size: 14px;
                 }
             }
         `;
