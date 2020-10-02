@@ -52,6 +52,7 @@ createApp(App)
 ```js
 this.$toast('Simple!', {
     duration: 1000,
+    // Position not yet supported
     styles: {
         borderRadius: '25px',
     },
