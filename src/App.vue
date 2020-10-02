@@ -1,9 +1,8 @@
 <template>
     <h1>vue-dk-toast</h1>
-    <button @click="toast()">Create Toast</button>
     <div id="duration">
         <label>Duration:</label>
-        <input type="range" min="1000" max="10000" step="100" v-model.number="duration" />
+        <input type="range" min="1000" max="100000" step="100" v-model.number="duration" />
         {{ duration }}
     </div>
     <div id="text">
@@ -20,6 +19,15 @@
             <pre @click="copyIcon(1)">&lt;span class="material-icons">thumb_up&lt;/span></pre>
         </small>
     </div>
+    <form @submit.prevent="addRule()" id="styles">
+        <label>Styles:</label>
+        <input type="text" v-model="styleProperty" />: <input type="text" v-model="styleValue" />
+        <input type="submit" value="Add Rule" />
+        <div id="code-styles">
+            <code v-for="style in displayStyles" :key="style">{{ style }}</code>
+        </div>
+    </form>
+    <button @click="toast()">Create Toast</button>
 </template>
 
 <script>
@@ -34,7 +42,10 @@ export default {
             duration: 1000,
             positionX: 'right',
             positionY: 'bottom',
-            styles: '',
+            styles: {},
+            styleProperty: '',
+            styleValue: '',
+            displayStyles: [],
             text: '',
             slot: '',
         };
@@ -44,18 +55,20 @@ export default {
         toast() {
             this.$toast(this.text, {
                 duration: this.duration,
-                styles: {
-                    borderRadius: '25px',
-                },
+                styles: this.styles,
                 slot: this.slot,
             });
-            this.$toast('test');
+            console.log(this.styles);
         },
         copyIcon(library) {
             this.slot =
                 library === 0
                     ? '<i class="fa fa-thumbs-up"></i>'
                     : '<span class="material-icons">thumb_up</span>';
+        },
+        addRule() {
+            this.styles[this.styleProperty] = this.styleValue;
+            this.displayStyles.push(`${this.styleProperty}: ${this.styleValue};`);
         },
     },
 

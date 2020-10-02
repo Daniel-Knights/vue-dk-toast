@@ -16,6 +16,8 @@ const renderToast = (app, options) => {
     // Render individual toast
     const DKToast = (text, localOptions) => {
         const toast = document.createElement('div');
+        const duration = localOptions.duration || options.duration;
+
         if (!localOptions) localOptions = {};
         if (!text && !localOptions.slot)
             return console.error('vue-dk-toast [Error]: a text value is required');
@@ -24,18 +26,12 @@ const renderToast = (app, options) => {
         if (localOptions.slot) toast.innerHTML += localOptions.slot;
         toast.className = 'dk__toast';
 
-        // Calculate -0.15s from the end of duration for animating out
-        toast.style.animation = `dk__toast-in 0.15s, dk__toast-in 0.15s ${(localOptions.duration ||
-            options.duration) /
-            1000 -
-            0.15}s reverse forwards`;
-
         // Set custom local styles
         if (localOptions.styles)
-            toast.setAttribute('style', formatCssProperties(localOptions.styles));
+            toast.setAttribute('style', formatCssProperties(localOptions.styles, duration));
 
         container.appendChild(toast);
-        setTimeout(() => container.removeChild(toast), localOptions.duration || options.duration);
+        setTimeout(() => container.removeChild(toast), duration);
     };
 
     app.config.globalProperties.$toast = DKToast;

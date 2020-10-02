@@ -4,6 +4,6 @@ src/main.js
 .vscode
 node_modules
 .prettierrc
-.babel.config.js
+babel.config.js
 .gitignore
 public

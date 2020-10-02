@@ -1,5 +1,5 @@
-export const formatCssProperties = object => {
-    const formatted = Object.keys(object)
+export const formatCssProperties = (styles, duration) => {
+    let formatted = Object.keys(styles)
         .map(style => {
             const formattedName = style
                 .split('')
@@ -9,23 +9,28 @@ export const formatCssProperties = object => {
                     const moz = style.split('moz')[0] === '';
                     const ms = style.split('ms')[0] === '';
 
+                    if (letter === '-') return letter;
                     if ((webkit || moz || ms) && index === 0) return `-${letter.toLowerCase()}`;
                     if (letter === letter.toUpperCase()) return `-${letter.toLowerCase()}`;
                     else return letter;
                 })
                 .join('');
-            return `${formattedName}: ${object[style]};`;
+            return `${formattedName}: ${styles[style]};`;
         })
         .join('');
 
-    return formatted;
+    // Calculate -0.15s from the end of duration for animating out
+    let animation = `animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${duration / 1000 -
+        0.15}s reverse forwards;`;
+
+    return (formatted += animation);
 };
 
 export const appendStylesheet = options => {
     let properties;
 
     // Format style properties/values
-    if (options.styles) properties = formatCssProperties(options.styles);
+    if (options.styles) properties = formatCssProperties(options.styles, options.duration);
 
     // Stylesheet content
     let styles = `
@@ -43,8 +48,7 @@ export const appendStylesheet = options => {
                 min-width: 125px;
                 font: clamp(0.9rem, 1.5vw, 1.2rem) Avenir, sans-serif;
                 text-align: center;
-                border-radius: 25px;
-                border: 1px solid #000;
+                border-radius: 5px;
                 background: #fff;
                 box-shadow: 0 1px 3px #000;
                 ${properties || ''}
