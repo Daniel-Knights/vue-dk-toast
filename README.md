@@ -56,5 +56,6 @@ this.$toast('Simple!', {
     styles: {
         borderRadius: '25px',
     },
+    slot: '<i class="fa fa-thumbs-up"></i>',
 });
 ```

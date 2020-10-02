@@ -16,7 +16,7 @@ const renderToast = (app, options) => {
     // Render individual toast
     const DKToast = (text, localOptions) => {
         const toast = document.createElement('div');
-        const duration = localOptions.duration || options.duration;
+        let duration;
 
         if (!localOptions) localOptions = {};
         if (!text && !localOptions.slot)
@@ -27,6 +27,7 @@ const renderToast = (app, options) => {
         toast.className = 'dk__toast';
 
         // Set custom local styles
+        duration = localOptions.duration ? localOptions.duration : options.duration;
         if (localOptions.styles)
             toast.setAttribute('style', formatCssProperties(localOptions.styles, duration));
 

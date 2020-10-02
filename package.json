@@ -6,6 +6,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "lint": "vue-cli-service lint",
+        "build": "vue-cli-service build",
         "lib": "vue-cli-service build --target lib --name dkToast ./src/toast.js"
     },
     "dependencies": {
