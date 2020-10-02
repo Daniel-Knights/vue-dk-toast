@@ -1,6 +1,6 @@
 {
     "name": "vue-dk-toast",
-    "version": "0.1.11",
+    "version": "0.1.12",
     "private": false,
     "main": "/dist/dkToast.umd.min.js",
     "scripts": {
