@@ -1,126 +1,27 @@
 <template>
-    <h1>vue-dk-toast</h1>
-
-    <code id="code-preview">
-        <pre>
-    this.$toast({{ text }}, {
-        duration: {{ duration }},
-        styles: {
-            <div id="preview-styles">
-            <div v-for="style in displayStyles" :key="style">{{ style }}</div>
-            </div>
-        },
-        slot: `<div id="preview-slot">{{ slot }}</div>
-    </pre>
-        <pre>
-        `
-    });
-    </pre
-        >
-    </code>
-
-    <div id="duration" class="property">
-        <label>Duration:</label>
-        <div id="duration-slider">
-            <input type="range" min="1000" max="100000" step="100" v-model.number="duration" />
-            {{ duration }}
-        </div>
-    </div>
-    <div id="text" class="property">
-        <label>Text:</label>
-        <input type="text" v-model="text" :class="{ valid: valid, invalid: valid === false }" />
-    </div>
-    <div id="icon" class="property">
-        <label>Slot:</label>
-        <textarea v-model="slot" :class="{ valid: valid, invalid: valid === false }" />
-        <small
-            >Any valid HTML can go here. Fontawesome and Material Icons are loaded into this demo,
-            give it a try:
-            <pre @click="copyIcon(0)">&lt;i class="fa fa-thumbs-up"&gt;&lt;/i&gt;</pre>
-            <pre @click="copyIcon(1)">&lt;span class="material-icons">thumb_up&lt;/span></pre>
-        </small>
-    </div>
-    <form @submit.prevent="addRule()" id="styles" class="property">
-        <label>Styles:</label>
-        <div id="styles-inputs">
-            <input type="text" v-model="styleProperty" />:
-            <input type="text" v-model="styleValue" />;
-        </div>
-        <input type="submit" value="Add Rule" />
-        <div id="code-styles">
-            <div v-for="style in displayStyles" :key="style" class="code-style">
-                <code>{{ style }}</code
-                ><i @click="filterRule(style)" class="fa fa-times"></i>
-            </div>
-        </div>
-    </form>
     <button @click="toast()" id="create-toast">Create Toast</button>
 </template>
 
 <script>
-import DKToast from './toast';
-import app from './main';
-
 export default {
     name: 'App',
 
     data() {
         return {
             duration: 1000,
-            positionX: 'right',
-            positionY: 'bottom',
-            styles: {},
-            styleProperty: '',
-            styleValue: '',
             text: '',
             slot: '',
-            valid: null,
         };
-    },
-
-    computed: {
-        displayStyles: function() {
-            return Object.keys(this.styles).map(style => {
-                return `${style}: ${this.styles[style]};`;
-            });
-        },
     },
 
     methods: {
         toast() {
-            if (!this.text && !this.slot) this.valid = false;
-            else this.valid = true;
-
-            this.$toast(this.text, {
-                duration: this.duration,
-                styles: this.styles,
-                slot: this.slot,
+            this.$toast('hello', {
+                duration: 1000,
+                styles: {},
+                slot: '',
             });
-            console.log(this.styles);
         },
-        copyIcon(library) {
-            this.slot =
-                library === 0
-                    ? '<i class="fa fa-thumbs-up"></i>'
-                    : '<span class="material-icons">thumb_up</span>';
-        },
-        addRule() {
-            this.styles[this.styleProperty] = this.styleValue;
-        },
-        filterRule(style) {
-            delete this.styles[style.split(':')[0]];
-        },
-    },
-
-    created() {
-        app.use(DKToast, {
-            duration: 2000,
-            positionX: this.positionX,
-            positionY: this.positionY,
-            styles: {
-                borderRadius: '5px',
-            },
-        });
     },
 };
 </script>

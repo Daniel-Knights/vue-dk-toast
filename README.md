@@ -2,6 +2,8 @@
 
 Lightweight toast-notification plugin for Vue3.
 
+[Demo](https://vue-dk-toasted.netlify.app/)
+
 ## Install
 
 ```bash
