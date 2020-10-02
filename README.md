@@ -2,7 +2,7 @@
 
 Lightweight toast-notification plugin for Vue3.
 
-[Demo](https://vue-dk-toasted.netlify.app/)
+[Demo](https://vue-dk-toast.netlify.app/)
 
 ## Install
 
