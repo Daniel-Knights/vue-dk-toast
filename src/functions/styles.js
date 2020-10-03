@@ -31,6 +31,10 @@ export const appendStylesheet = options => {
 
     // Format style properties/values
     if (options.styles) properties = formatCssProperties(options.styles, options.duration);
+    else {
+        properties = `animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${options.duration / 1000 -
+            0.15}s reverse forwards;`;
+    }
 
     // Stylesheet content
     let styles = `
