@@ -42,6 +42,9 @@
         "last 2 versions",
         "not dead"
     ],
+    "files": [
+        "dist/dkToast.umd.min.js"
+    ],
     "externals": {
         "vue": "vue"
     }

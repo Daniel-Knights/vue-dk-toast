@@ -1,9 +1,0 @@
-src/functions
-src/App.vue
-src/main.js
-.vscode
-node_modules
-.prettierrc
-babel.config.js
-.gitignore
-public
