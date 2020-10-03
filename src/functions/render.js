@@ -16,7 +16,7 @@ const renderToast = (app, options) => {
     // Render individual toast
     const DKToast = (text, localOptions) => {
         const toast = document.createElement('div');
-        let duration, clicked;
+        let duration, styles, clicked;
 
         if (!localOptions) localOptions = {};
         if (!text && !localOptions.slot)
@@ -29,8 +29,8 @@ const renderToast = (app, options) => {
 
         // Set custom local styles
         duration = localOptions.duration ? localOptions.duration : options.duration;
-        if (localOptions.styles)
-            toast.setAttribute('style', formatCssProperties(localOptions.styles, duration));
+        styles = localOptions.styles ? localOptions.styles : options.styles;
+        toast.setAttribute('style', formatCssProperties(styles, duration));
 
         // Remove toast on click
         toast.addEventListener('click', () => {

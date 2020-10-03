@@ -1,4 +1,6 @@
 export const formatCssProperties = (styles, duration) => {
+    if (!styles) styles = {};
+
     let formatted = Object.keys(styles)
         .map(style => {
             const formattedName = style
@@ -27,14 +29,8 @@ export const formatCssProperties = (styles, duration) => {
 };
 
 export const appendStylesheet = options => {
-    let properties;
-
     // Format style properties/values
-    if (options.styles) properties = formatCssProperties(options.styles, options.duration);
-    else {
-        properties = `animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${options.duration / 1000 -
-            0.15}s reverse forwards;`;
-    }
+    let properties = formatCssProperties(options.styles, options.duration);
 
     // Stylesheet content
     let styles = `

@@ -8,10 +8,8 @@ export default {
 
     methods: {
         toast() {
-            this.$toast('', {
-                duration: 10000,
-                styles: {},
-                slot: '<span class="material-icons">thumb_up</span>',
+            this.$toast('test', {
+                styles: { border: '1px solid' },
             });
         },
     },
