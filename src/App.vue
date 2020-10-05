@@ -8,8 +8,19 @@ export default {
 
     methods: {
         toast() {
-            this.$toast('test', {
+            this.$toast('', {
+                duration: 100000,
                 styles: { border: '1px solid' },
+                slot: '<i class="fa fa-thumbs-up"></i>',
+            });
+            this.$toast('test', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+            });
+            this.$toast('test', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slot: '<i class="fa fa-thumbs-up"></i>',
             });
         },
     },

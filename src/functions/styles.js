@@ -70,7 +70,7 @@ export const appendStylesheet = options => {
                 font-size: 16px;
             }
             .dk__icon-only {
-                padding: 7px 0;
+                padding: 6px 0;
                 width: fit-content;
             }
             .dk__icon-only i,
@@ -97,11 +97,12 @@ export const appendStylesheet = options => {
                     width: 90%;
                 }
                 .dk__toast {
-                    padding: 7px 30px;
+                    padding: 10px 30px;
                 }
                 .dk__icon-only {
-                    width: 70%;
+                    width: calc(100% - 64px);
                     margin: 5px auto;
+                    padding: 8px 30px;
                 }
             }
         `;
