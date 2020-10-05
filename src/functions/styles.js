@@ -31,6 +31,10 @@ export const formatCssProperties = (styles, duration) => {
 export const appendStylesheet = options => {
     // Format style properties/values
     let properties = formatCssProperties(options.styles, options.duration);
+    let oppositePositionX;
+
+    if (options.positionX === 'left') oppositePositionX = 'right';
+    else oppositePositionX = 'left';
 
     // Stylesheet content
     let styles = `
@@ -40,6 +44,7 @@ export const appendStylesheet = options => {
                 position: fixed;
                 ${options.positionY}: 40px;
                 ${options.positionX}: 60px;
+                margin-${oppositePositionX}: 60px;
                 z-index: 100;
             }
             .dk__toast {
@@ -71,7 +76,6 @@ export const appendStylesheet = options => {
             }
             .dk__icon-only {
                 padding: 6px 0;
-                width: fit-content;
             }
             .dk__icon-only i,
             .dk__icon-only span {
@@ -92,7 +96,7 @@ export const appendStylesheet = options => {
                 .dk__toast-container {
                     right: 0;
                     left: 0;
-                    bottom: 10px;
+                    ${options.positionY}: 10px;
                     margin: 0 auto;
                     width: 90%;
                 }
@@ -100,8 +104,7 @@ export const appendStylesheet = options => {
                     padding: 10px 30px;
                 }
                 .dk__icon-only {
-                    width: calc(100% - 64px);
-                    margin: 5px auto;
+                    flex: 1;
                     padding: 8px 30px;
                 }
             }

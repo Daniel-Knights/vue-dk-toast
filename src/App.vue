@@ -17,11 +17,14 @@ export default {
                 duration: 100000,
                 styles: { border: '1px solid' },
             });
-            this.$toast('test', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slot: '<i class="fa fa-thumbs-up"></i>',
-            });
+            this.$toast(
+                'test test test test test test test test test test test test test test test test test test ',
+                {
+                    duration: 100000,
+                    styles: { border: '1px solid' },
+                    slot: '<i class="fa fa-thumbs-up"></i>',
+                }
+            );
         },
     },
 };
