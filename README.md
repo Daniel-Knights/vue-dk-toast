@@ -6,11 +6,21 @@ Lightweight toast-notification plugin for Vue3.
 
 ## Install
 
+CLI
+
 ```bash
 npm i vue-dk-toast
 ```
 
+CDN
+
+```html
+<script src="https://unpkg.com/vue-dk-toast@0.1.23/dist/dkToast.umd.min.js"></script>
+```
+
 ## Import
+
+CLI
 
 ```js
 import { createApp } from 'vue';
@@ -20,6 +30,15 @@ import DKToast from 'vue-dk-toast';
 createApp(App)
     .use(DKToast)
     .mount('#app');
+```
+
+CDN
+
+```js
+const app = Vue.createApp({});
+
+app.use(DKToast);
+app.mount('#app');
 ```
 
 ## Usage
