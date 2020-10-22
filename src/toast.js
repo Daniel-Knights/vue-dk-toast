@@ -17,3 +17,8 @@ const toastPlugin = {
 };
 
 export default toastPlugin;
+
+// CDN compatibility
+if (window !== undefined && window.Vue) {
+    window.DKToast = toastPlugin;
+}
