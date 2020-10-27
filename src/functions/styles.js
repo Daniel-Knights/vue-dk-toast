@@ -50,11 +50,10 @@ export const appendStylesheet = options => {
             .dk__toast {
                 cursor: pointer;
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
                 align-items: center;
-                position: relative;
                 margin: 5px 0;
-                padding: 7px 45px;
+                padding: 7px 10px;
                 min-width: 100px;
                 font: 17px Avenir, sans-serif;
                 text-align: center;
@@ -67,11 +66,9 @@ export const appendStylesheet = options => {
             .dk__toast:hover {
                 opacity: 0.7;
             }
-            .dk__toast span,
+            .dk__toast span, div,
             .dk__toast i {
-                position: absolute;
-                right: 10px;
-                padding: 5px;
+                padding: 5px 12px;
                 font-size: 16px;
             }
             .dk__icon-only {
