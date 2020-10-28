@@ -50,6 +50,16 @@ export default {
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
                 slotRight: '<i class="fa fa-thumbs-up"></i>',
             });
+            this.$toast('', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<span class="material-icons">thumb_up</span>',
+            });
+            this.$toast('mixed icons', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<span class="material-icons">thumb_up</span>',
+            });
         },
     },
 };

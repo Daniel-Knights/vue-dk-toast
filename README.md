@@ -77,6 +77,7 @@ this.$toast('Simple!', {
     styles: {
         borderRadius: '25px',
     },
+    // Any valid HTML, intended for icons
     slotLeft: '<i class="fa fa-user"></i>', // Add icon to left
     slotRight: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
 });

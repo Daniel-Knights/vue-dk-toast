@@ -113,6 +113,7 @@ export const appendStylesheet = options => {
         }
         .dk__icon-left,
         .dk__icon-right {
+            display: flex;
             position: absolute;
             padding: 5px 12px;
         }
@@ -133,10 +134,11 @@ export const appendStylesheet = options => {
         }
         .dk__icon-only .dk__icon-left,
         .dk__icon-only .dk__icon-right {
+            display: flex;
             position: relative;
             right: unset;
             left: unset;
-            padding: 0;
+            padding: 4px;
         }
         @-webkit-keyframes dk__toast-in {
             from {
