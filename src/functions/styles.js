@@ -111,28 +111,27 @@ export const appendStylesheet = options => {
         .dk__toast:hover {
             opacity: 0.7;
         }
-        .dk__toast i,
-        .dk__toast span {
+        .dk__icon-left,
+        .dk__icon-right {
             position: absolute;
             padding: 5px 12px;
             font-size: 16px;
         }
-        .dk__icon-left i:first-of-type,
-        .dk__icon-left span:first-of-type {
+        .dk__icon-left {
             left: 0;
         }
-        .dk__icon-right i:last-of-type,
-        .dk__icon-right span:last-of-type {
+        .dk__icon-right {
             right: 0;
         }
         .dk__icon-only {
             padding: 6px 0;
         }
-        .dk__icon-only i,
-        .dk__icon-only span {
+        .dk__icon-only .dk__icon-left,
+        .dk__icon-only .dk__icon-right {
             position: relative;
             right: unset;
             left: unset;
+            padding: 0;
         }
         @-webkit-keyframes dk__toast-in {
             from {

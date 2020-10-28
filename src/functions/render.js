@@ -30,13 +30,11 @@ const renderToast = (app, options) => {
         if (text) toast.textContent = text;
         // If left slot
         if (left) {
-            toast.innerHTML = left + toast.innerHTML;
-            toast.classList.add('dk__icon-left');
+            toast.innerHTML = `<div class="dk__icon-left">${left}</div>` + toast.innerHTML;
         }
         // If right slot
         if (right) {
-            toast.innerHTML += right;
-            toast.classList.add('dk__icon-right');
+            toast.innerHTML += `<div class="dk__icon-right">${right}</div>`;
         }
         // If slot only
         if (!text && (left || right)) toast.classList.add('dk__icon-only');
