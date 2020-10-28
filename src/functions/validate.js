@@ -28,7 +28,6 @@ export const validateLocalOptions = (text, options) => {
     // Slot deprecation warning
     if (options.slot) {
         console.warn('vue-dk-toast [Warn]: slot is now deprecated. Use slotRight instead');
-        valid = false;
     }
 
     return valid;
