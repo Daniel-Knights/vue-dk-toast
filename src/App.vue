@@ -8,6 +8,7 @@ export default {
 
     methods: {
         toast() {
+            this.$toast('');
             this.$toast('text only');
             this.$toast('text with options', {
                 duration: 100000,

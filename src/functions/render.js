@@ -1,4 +1,5 @@
 import { formatCssProperties } from './styles';
+import { validateLocalOptions } from './validate';
 
 const renderToast = (app, options) => {
     // Render toast container
@@ -21,30 +22,23 @@ const renderToast = (app, options) => {
         const right = localOptions.slot || localOptions.slotRight;
         let duration, styles, clicked;
 
-        // Required text value
-        if (!text && !left && !right) {
-            return console.error('vue-dk-toast [Error]: a text/slot value is required');
-        }
-        // Slot deprecation warning
-        if (localOptions.slot) {
-            console.warn('vue-dk-toast [Warn]: slot is now deprecated. Use slotRight instead');
-        }
+        validateLocalOptions(text, localOptions);
 
         toast.className = 'dk__toast';
 
         // If text
         if (text) toast.textContent = text;
-        // If left icon
+        // If left slot
         if (left) {
             toast.innerHTML = left + toast.innerHTML;
             toast.classList.add('dk__icon-left');
         }
-        // If right icon
+        // If right slot
         if (right) {
             toast.innerHTML += right;
             toast.classList.add('dk__icon-right');
         }
-        // If icon only
+        // If slot only
         if (!text && (left || right)) toast.classList.add('dk__icon-only');
 
         // Set custom local styles

@@ -1,4 +1,4 @@
-import validateOptions from './functions/validate';
+import { validateOptions } from './functions/validate';
 import { appendStylesheet } from './functions/styles';
 import renderToast from './functions/render';
 

@@ -28,6 +28,7 @@ const minify = styles => {
     return minified;
 };
 
+// Format CSS from camelCase
 export const formatCssProperties = (styles, duration) => {
     if (!styles) styles = {};
 
@@ -58,6 +59,7 @@ export const formatCssProperties = (styles, duration) => {
     return (formatted += animation);
 };
 
+// Append minified stylesheet to document head
 export const appendStylesheet = options => {
     // Format style properties/values
     let properties = formatCssProperties(options.styles, options.duration);
@@ -68,84 +70,114 @@ export const appendStylesheet = options => {
 
     // Stylesheet content
     let styles = `
+        .dk__toast-container {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            position: fixed;
+            ${options.positionY}: 40px;
+            ${options.positionX}: 60px;
+            margin-${oppositePositionX}: 60px;
+            z-index: 100;
+        }
+        .dk__toast {
+            cursor: pointer;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+                justify-content: space-around;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            margin: 5px 0;
+            padding: 7px 40px;
+            min-width: 100px;
+            font: 17px Avenir, sans-serif;
+            text-align: center;
+            border-radius: 5px;
+            background: #fff;
+            -webkit-box-shadow: 0 1px 3px #000;
+                    box-shadow: 0 1px 3px #000;
+            -webkit-transition: opacity 0.25s;
+            -o-transition: opacity 0.25s;
+            transition: opacity 0.25s;
+            ${properties || ''}
+        }
+        .dk__toast:hover {
+            opacity: 0.7;
+        }
+        .dk__toast i,
+        .dk__toast span {
+            position: absolute;
+            padding: 5px 12px;
+            font-size: 16px;
+        }
+        .dk__icon-left i:first-of-type,
+        .dk__icon-left span:first-of-type {
+            left: 0;
+        }
+        .dk__icon-right i:last-of-type,
+        .dk__icon-right span:last-of-type {
+            right: 0;
+        }
+        .dk__icon-only {
+            padding: 6px 0;
+        }
+        .dk__icon-only i,
+        .dk__icon-only span {
+            position: relative;
+            right: unset;
+            left: unset;
+        }
+        @-webkit-keyframes dk__toast-in {
+            from {
+                -webkit-transform: translateY(100%);
+                        transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform: translateY(0);
+                        transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes dk__toast-in {
+            from {
+                -webkit-transform: translateY(100%);
+                        transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform: translateY(0);
+                        transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @media only screen and (max-width: 450px) {
             .dk__toast-container {
-                display: flex;
-                flex-direction: column;
-                position: fixed;
-                ${options.positionY}: 40px;
-                ${options.positionX}: 60px;
-                margin-${oppositePositionX}: 60px;
-                z-index: 100;
+                right: 0;
+                left: 0;
+                ${options.positionY}: 10px;
+                bottom: 10px;
+                margin: 0 auto;
+                width: 90%;
             }
             .dk__toast {
-                cursor: pointer;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                margin: 5px 0;
-                padding: 7px 40px;
-                min-width: 100px;
-                font: 17px Avenir, sans-serif;
-                text-align: center;
-                border-radius: 5px;
-                background: #fff;
-                box-shadow: 0 1px 3px #000;
-                transition: opacity 0.25s;
-                ${properties || ''}
-            }
-            .dk__toast:hover {
-                opacity: 0.7;
-            }
-            .dk__toast i,
-            .dk__toast span {
-                position: absolute;
-                padding: 5px 12px;
-                font-size: 16px;
-            }
-            .dk__icon-left i:first-of-type,
-            .dk__icon-left span:first-of-type {
-                left: 0;
-            }
-            .dk__icon-right i:last-of-type,
-            .dk__icon-right span:last-of-type {
-                right: 0;
+                padding: 10px 40px;
             }
             .dk__icon-only {
-                padding: 6px 0;
+                -webkit-box-flex: 1;
+                    -ms-flex: 1;
+                        flex: 1;
+                padding: 8px 30px;
             }
-            .dk__icon-only i,
-            .dk__icon-only span {
-                position: relative;
-                right: unset;
-                left: unset;
-            }
-            @keyframes dk__toast-in {
-                from {
-                    transform: translateY(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-            @media only screen and (max-width: 450px) {
-                .dk__toast-container {
-                    right: 0;
-                    left: 0;
-                    ${options.positionY}: 10px;
-                    margin: 0 auto;
-                    width: 90%;
-                }
-                .dk__toast {
-                    padding: 10px 40px;
-                }
-                .dk__icon-only {
-                    flex: 1;
-                    padding: 8px 30px;
-                }
-            }
-        `;
+        }
+    `;
 
     // Create stylesheet
     const stylesheet = document.createElement('style');
