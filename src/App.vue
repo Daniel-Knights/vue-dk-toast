@@ -30,23 +30,23 @@ export default {
                 duration: 100000,
                 styles: { border: '1px solid' },
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slot: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<i class="fa fa-thumbs-up"></i>',
             });
             this.$toast('', {
                 duration: 100000,
                 styles: { border: '1px solid' },
-                slot: '<i class="fa fa-thumbs-up"></i>',
-            });
-            this.$toast('', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<i class="fa fa-thumbs-up"></i>',
             });
             this.$toast('', {
                 duration: 100000,
                 styles: { border: '1px solid' },
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slot: '<i class="fa fa-thumbs-up"></i>',
+            });
+            this.$toast('', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<i class="fa fa-thumbs-up"></i>',
             });
         },
     },
