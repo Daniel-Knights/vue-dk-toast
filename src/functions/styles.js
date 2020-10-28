@@ -1,3 +1,33 @@
+// Minify CSS
+const minify = styles => {
+    let property = false;
+    let value = false;
+
+    const minified = styles
+        .split('')
+        .map((char, i, arr) => {
+            // Retain spaces between selectors
+            if ((char === '.' && !parseInt(arr[i + 1])) || (char === '#' && !value))
+                property = true;
+            if (property && (char === ',' || char === '{')) property = false;
+
+            // Retain spaces between rules with multiple values
+            if ((char === ':' || char === '@') && !property) value = true;
+            if ((char === ';' || char === '{') && !property) value = false;
+
+            // Replace spaces and line-breaks
+            if ((char === ' ' || char === '\n' || char === '\r') && !property && !value) return '';
+            return char;
+        })
+        .join('')
+        .split(' {')
+        .join('{')
+        .split(': ')
+        .join(':');
+
+    return minified;
+};
+
 export const formatCssProperties = (styles, duration) => {
     if (!styles) styles = {};
 
@@ -53,7 +83,7 @@ export const appendStylesheet = options => {
                 justify-content: space-around;
                 align-items: center;
                 margin: 5px 0;
-                padding: 7px 10px;
+                padding: 7px 40px;
                 min-width: 100px;
                 font: 17px Avenir, sans-serif;
                 text-align: center;
@@ -66,10 +96,19 @@ export const appendStylesheet = options => {
             .dk__toast:hover {
                 opacity: 0.7;
             }
-            .dk__toast span, div,
-            .dk__toast i {
+            .dk__toast i,
+            .dk__toast span {
+                position: absolute;
                 padding: 5px 12px;
                 font-size: 16px;
+            }
+            .dk__icon-left i:first-of-type,
+            .dk__icon-left span:first-of-type {
+                left: 0;
+            }
+            .dk__icon-right i:last-of-type,
+            .dk__icon-right span:last-of-type {
+                right: 0;
             }
             .dk__icon-only {
                 padding: 6px 0;
@@ -78,6 +117,7 @@ export const appendStylesheet = options => {
             .dk__icon-only span {
                 position: relative;
                 right: unset;
+                left: unset;
             }
             @keyframes dk__toast-in {
                 from {
@@ -98,7 +138,7 @@ export const appendStylesheet = options => {
                     width: 90%;
                 }
                 .dk__toast {
-                    padding: 10px 30px;
+                    padding: 10px 40px;
                 }
                 .dk__icon-only {
                     flex: 1;
@@ -111,7 +151,7 @@ export const appendStylesheet = options => {
     const stylesheet = document.createElement('style');
 
     // Set stylesheet content
-    stylesheet.innerHTML = styles;
+    stylesheet.innerHTML = minify(styles);
 
     // Append
     document.head.appendChild(stylesheet);

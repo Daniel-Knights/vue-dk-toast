@@ -36,9 +36,15 @@ const renderToast = (app, options) => {
         // If text
         if (text) toast.textContent = text;
         // If left icon
-        if (left) toast.innerHTML = left + toast.innerHTML;
+        if (left) {
+            toast.innerHTML = left + toast.innerHTML;
+            toast.classList.add('dk__icon-left');
+        }
         // If right icon
-        if (right) toast.innerHTML += right;
+        if (right) {
+            toast.innerHTML += right;
+            toast.classList.add('dk__icon-right');
+        }
         // If icon only
         if (!text && (left || right)) toast.classList.add('dk__icon-only');
 

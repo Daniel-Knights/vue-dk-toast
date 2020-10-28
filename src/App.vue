@@ -16,6 +16,10 @@ export default {
                 duration: 100000,
                 styles: { border: '1px solid' },
             });
+            this.$toast('long text long text long text long text long text long text', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+            });
             this.$toast('text + right icon ', {
                 duration: 100000,
                 styles: { border: '1px solid' },
