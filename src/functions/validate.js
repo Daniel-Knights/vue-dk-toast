@@ -18,13 +18,18 @@ export const validateOptions = options => {
 };
 
 export const validateLocalOptions = (text, options) => {
-    console.log(options);
+    let valid = true;
+
     // Required text value
     if (!text && !options.slotLeft && !options.slotRight && !options.slot) {
-        return console.error('vue-dk-toast [Error]: a text/slot value is required');
+        console.error('vue-dk-toast [Error]: a text/slot value is required');
+        valid = false;
     }
     // Slot deprecation warning
     if (options.slot) {
         console.warn('vue-dk-toast [Warn]: slot is now deprecated. Use slotRight instead');
+        valid = false;
     }
+
+    return valid;
 };

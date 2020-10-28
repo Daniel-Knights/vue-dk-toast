@@ -22,7 +22,7 @@ const renderToast = (app, options) => {
         const right = localOptions.slot || localOptions.slotRight;
         let duration, styles, clicked;
 
-        validateLocalOptions(text, localOptions);
+        if (!validateLocalOptions(text, localOptions)) return;
 
         toast.className = 'dk__toast';
 
