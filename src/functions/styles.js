@@ -115,13 +115,18 @@ export const appendStylesheet = options => {
         .dk__icon-right {
             position: absolute;
             padding: 5px 12px;
-            font-size: 16px;
         }
         .dk__icon-left {
             left: 0;
         }
         .dk__icon-right {
             right: 0;
+        }
+        .dk__icon-left i,
+        .dk__icon-left span,
+        .dk__icon-right i,
+        .dk__icon-right span {
+            font-size: 16px;
         }
         .dk__icon-only {
             padding: 6px 0;
