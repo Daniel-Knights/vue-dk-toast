@@ -152,6 +152,7 @@ export const appendStylesheet = options => {
 
     // Set stylesheet content
     stylesheet.innerHTML = minify(styles);
+    stylesheet.type = 'text/css';
 
     // Append
     document.head.appendChild(stylesheet);

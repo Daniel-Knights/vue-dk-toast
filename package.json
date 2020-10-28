@@ -1,5 +1,6 @@
 {
     "name": "vue-dk-toast",
+    "description": "Lightweight toast notification plugin for Vue 3",
     "version": "0.1.24",
     "private": false,
     "main": "/dist/dkToast.umd.min.js",
@@ -47,5 +48,14 @@
     ],
     "externals": {
         "vue": "vue"
-    }
+    },
+    "keywords": [
+        "vue",
+        "vue3",
+        "vuejs",
+        "plugin",
+        "toast",
+        "notification",
+        "notifications"
+    ]
 }

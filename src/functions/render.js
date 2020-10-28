@@ -15,16 +15,15 @@ const renderToast = (app, options) => {
 
     // Render individual toast
     const DKToast = (text, localOptions) => {
+        if (!localOptions) localOptions = {};
         const toast = document.createElement('div');
         const left = localOptions.slotLeft;
         const right = localOptions.slot || localOptions.slotRight;
         let duration, styles, clicked;
 
-        if (!localOptions) localOptions = {};
-
         // Required text value
         if (!text && !left && !right) {
-            return console.error('vue-dk-toast [Error]: a text value is required');
+            return console.error('vue-dk-toast [Error]: a text/slot value is required');
         }
         // Slot deprecation warning
         if (localOptions.slot) {

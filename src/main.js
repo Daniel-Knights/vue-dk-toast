@@ -6,6 +6,8 @@ const app = createApp(App);
 
 app.use(DKToast, {
     duration: 10000,
-    styles: { border: '10px solid' },
+    // positionY: 'top',
+    // positionX: 'left',
+    // styles: { border: '10px solid' },
 });
 app.mount('#app');

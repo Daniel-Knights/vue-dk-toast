@@ -8,11 +8,8 @@ export default {
 
     methods: {
         toast() {
-            this.$toast('', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-            });
-            this.$toast('text only', {
+            this.$toast('text only');
+            this.$toast('text with options', {
                 duration: 100000,
                 styles: { border: '1px solid' },
             });
