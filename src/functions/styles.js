@@ -1,22 +1,24 @@
 // Minify CSS
 const minify = styles => {
-    let property = false;
+    let selector = false;
     let value = false;
 
     const minified = styles
         .split('')
-        .map((char, i, arr) => {
+        .map(char => {
             // Retain spaces between selectors
-            if ((char === '.' && !parseInt(arr[i + 1])) || (char === '#' && !value))
-                property = true;
-            if (property && (char === ',' || char === '{')) property = false;
+            // Determine start of selector
+            if ((char === '.' || char === '@' || char === '#') && !value) selector = true;
+            // Determine end of selector
+            if (selector && (char === ',' || char === '{')) selector = false;
 
             // Retain spaces between rules with multiple values
-            if ((char === ':' || char === '@') && !property) value = true;
-            if ((char === ';' || char === '{') && !property) value = false;
+            if (char === ':' && !selector) value = true;
+            if (char === ';' && !selector) value = false;
 
             // Replace spaces and line-breaks
-            if ((char === ' ' || char === '\n' || char === '\r') && !property && !value) return '';
+            if ((char === ' ' || char === '\n' || char === '\r') && !selector && !value) return '';
+
             return char;
         })
         .join('')
