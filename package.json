@@ -2,6 +2,12 @@
     "name": "vue-dk-toast",
     "description": "Lightweight toast notification plugin for Vue 3",
     "version": "1.1.4",
+    "author": "Daniel Knights",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Daniel-Knights/vue-dk-toast"
+    },
     "private": false,
     "main": "/dist/dkToast.umd.min.js",
     "scripts": {
