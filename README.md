@@ -1,5 +1,8 @@
 # vue-dk-toast
 
+[![npm](https://img.shields.io/npm/v/vue-dk-toast.svg)](https://www.npmjs.com/package/vue-dk-toast)
+[![vue](https://img.shields.io/badge/vue-3.x-brightgreen)](https://v3.vuejs.org/)
+
 Lightweight toast-notification plugin for Vue 3.
 
 [Demo](https://vue-dk-toast.netlify.app/)
@@ -27,9 +30,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import DKToast from 'vue-dk-toast';
 
-createApp(App)
-    .use(DKToast)
-    .mount('#app');
+createApp(App).use(DKToast).mount('#app');
 ```
 
 CDN
