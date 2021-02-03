@@ -1,6 +1,6 @@
 {
     "name": "vue-dk-toast",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "private": false,
     "description": "Lightweight toast notification plugin for Vue 3",
     "author": "Daniel Knights",
