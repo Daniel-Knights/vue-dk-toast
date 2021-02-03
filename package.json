@@ -14,16 +14,14 @@
         "pub-major": "npm version major && npm publish",
         "postinstall": "node install.js"
     },
-    "main": "index.js",
+    "main": "dist/dkToast.umd.min.js",
     "files": [
         "dist/dkToast.umd.min.js",
         "dist/dkToast.umd.min.js.map",
         "dist/toast.d.ts",
         "dist/types.ts",
-        "install.js",
-        "index.js"
+        "install.js"
     ],
-    "types": "dist/toast.d.ts",
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.33.0",
         "@typescript-eslint/parser": "^2.33.0",
