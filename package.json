@@ -8,7 +8,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "lint": "vue-cli-service lint",
-        "lib": "vue-cli-service build --target lib --name dkToast ./src/lib/toast.ts && cp src/lib/types.ts dist/types.ts && cp src/lib/toast.d.ts dist/toast.d.ts",
+        "lib": "vue-cli-service build --target lib --name dkToast ./src/lib/toast.ts && cp src/lib/toast.d.ts dist/toast.d.ts",
         "pub": "npm version patch && npm publish",
         "pub-minor": "npm version minor && npm publish",
         "pub-major": "npm version major && npm publish",
@@ -19,7 +19,6 @@
         "dist/dkToast.umd.min.js",
         "dist/dkToast.umd.min.js.map",
         "dist/toast.d.ts",
-        "dist/types.ts",
         "install.js"
     ],
     "types": "dist/toast.d.ts",
