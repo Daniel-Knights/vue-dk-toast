@@ -2,67 +2,76 @@
     <button @click="toast()" id="create-toast">Create Toast</button>
 </template>
 
-<script>
-export default {
-    name: 'App',
+<script lang="ts">
+import { defineComponent, inject } from 'vue'
+// eslint-disable-next-line
+import type { Toast } from '../dist/types'
 
+export default defineComponent({
+    name: 'App',
+    setup() {
+        const toast = inject<Toast>('$toast')
+
+        if (toast) toast('provide')
+    },
     methods: {
-        toast() {
-            this.$toast('');
-            this.$toast('text only');
+        toast(): void {
+            // Error
+            this.$toast('')
+            this.$toast('text only')
             this.$toast('text with options', {
                 duration: 100000,
-                styles: { border: '1px solid' },
-            });
+                styles: { border: '1px solid' }
+            })
             this.$toast('long text long text long text long text long text long text', {
                 duration: 100000,
-                styles: { border: '1px solid' },
-            });
-            this.$toast('text + right icon ', {
+                styles: { border: '1px solid' }
+            })
+            this.$toast('text + right icon (deprecated)', {
                 duration: 100000,
                 styles: { border: '1px solid' },
-                slot: '<i class="fa fa-thumbs-up"></i>',
-            });
+                slot: '<i class="fa fa-thumbs-up"></i>'
+            })
             this.$toast('text + left icon ', {
                 duration: 100000,
                 styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
-            });
+                slotLeft: '<i class="fa fa-thumbs-up"></i>'
+            })
             this.$toast('text + right + left icon', {
                 duration: 100000,
                 styles: { border: '1px solid' },
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<i class="fa fa-thumbs-up"></i>',
-            });
+                slotRight: '<i class="fa fa-thumbs-up"></i>'
+            })
             this.$toast('', {
                 duration: 100000,
                 styles: { border: '1px solid' },
-                slotRight: '<i class="fa fa-thumbs-up"></i>',
-            });
+                slotRight: '<i class="fa fa-thumbs-up"></i>'
+            })
+            this.$toast('', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slotLeft: '<i class="fa fa-thumbs-up"></i>'
+            })
             this.$toast('', {
                 duration: 100000,
                 styles: { border: '1px solid' },
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
-            });
-            this.$toast('', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<i class="fa fa-thumbs-up"></i>',
-            });
+                slotRight: '<i class="fa fa-thumbs-up"></i>'
+            })
             this.$toast('', {
                 duration: 100000,
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<span class="material-icons">thumb_up</span>',
-            });
+                slotRight: '<span class="material-icons">thumb_up</span>'
+            })
             this.$toast('mixed icons', {
                 duration: 100000,
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<span class="material-icons">thumb_up</span>',
-            });
-        },
-    },
-};
+                slotRight: '<span class="material-icons">thumb_up</span>'
+            })
+        }
+    }
+})
 </script>
 
 <style>
@@ -75,23 +84,19 @@ export default {
     margin-top: 60px;
     height: 1000vh;
 }
-
 input,
 textarea {
     border: 1px solid rgba(0, 0, 0, 0.6);
     border-radius: 2px;
 }
-
 button,
 [type='submit'] {
     cursor: pointer;
 }
-
 input,
 button {
     font: 18px Avenir, Helvetica, Arial, sans-serif;
 }
-
 .property {
     display: flex;
     flex-direction: column;
@@ -102,7 +107,6 @@ button {
     border-radius: 5px;
     box-shadow: 0 1px 5px -3px rgba(0, 0, 0, 0.8);
 }
-
 label {
     width: 100%;
     text-align: left;
@@ -110,7 +114,6 @@ label {
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 #code-preview {
     position: fixed;
     text-align: left;
@@ -121,41 +124,34 @@ label {
     text-overflow: ellipsis;
     overflow: hidden;
 }
-
 #code-preview pre {
     margin: 0;
 }
 #code-preview pre:nth-of-type(2) {
     margin-top: -26px;
 }
-
 #preview-styles {
     display: inline-flex;
     flex-direction: column;
 }
-
 #preview-slot {
     white-space: pre-line;
     max-width: 180px;
     padding-left: 92px;
 }
-
 #duration-slider {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
-
 #duration-slider input {
     cursor: pointer;
     flex: 1;
 }
-
 small {
     margin-top: 10px;
 }
-
 small pre {
     cursor: pointer;
     margin: 10px auto;
@@ -163,24 +159,20 @@ small pre {
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 5px;
 }
-
 small pre:hover {
     color: #fff;
     background: rgba(0, 0, 0, 0.8);
 }
-
 #styles [type='submit'] {
     margin: 10px auto;
     width: 150px;
 }
-
 #code-styles {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
 .code-style {
     display: flex;
     justify-content: center;
@@ -190,29 +182,24 @@ small pre:hover {
     width: 50%;
     padding: 2px;
 }
-
 .code-style code {
     width: 100%;
 }
-
 .code-style i {
     cursor: pointer;
     position: absolute;
     right: 0;
     font-size: 14px;
 }
-
 #create-toast {
     margin-bottom: 40px;
     width: 100%;
     max-width: 250px;
     font-size: 20px;
 }
-
 .invalid {
     border: 1px solid #ff0000;
 }
-
 .valid {
     border: 1px solid #90ee90;
 }

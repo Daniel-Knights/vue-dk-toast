@@ -1,74 +1,86 @@
+import type { Options } from './types'
+
 // Minify CSS
-const minify = styles => {
-    let selector = false;
-    let value = false;
+function minify(styles: string): string {
+    let selector = false
+    let value = false
 
     const minified = styles
         .split('')
-        .map(char => {
+        .map((char) => {
             // Retain spaces between selectors
             // Determine start of selector
-            if ((char === '.' || char === '@' || char === '#') && !value) selector = true;
+            if ((char === '.' || char === '@' || char === '#') && !value) selector = true
             // Determine end of selector
-            if (selector && (char === ',' || char === '{')) selector = false;
+            if (selector && (char === ',' || char === '{')) selector = false
 
             // Retain spaces between rules with multiple values
-            if (char === ':' && !selector) value = true;
-            if (char === ';' && !selector) value = false;
+            if (char === ':' && !selector) value = true
+            if (char === ';' && !selector) value = false
 
             // Replace spaces and line-breaks
-            if ((char === ' ' || char === '\n' || char === '\r') && !selector && !value) return '';
+            if ((char === ' ' || char === '\n' || char === '\r') && !selector && !value)
+                return ''
 
-            return char;
+            return char
         })
         .join('')
         .split(' {')
         .join('{')
         .split(': ')
-        .join(':');
+        .join(':')
 
-    return minified;
-};
+    return minified
+}
 
 // Format CSS from camelCase
-export const formatCssProperties = (styles, duration) => {
-    if (!styles) styles = {};
+export function formatCssProperties(
+    styles?: Record<string, string>,
+    duration?: number
+): string {
+    if (!styles) styles = {}
 
     let formatted = Object.keys(styles)
-        .map(style => {
+        .map((style) => {
             const formattedName = style
                 .split('')
                 .map((letter, index) => {
                     // Vendor prefixes
-                    const webkit = style.split('webkit')[0] === '';
-                    const moz = style.split('moz')[0] === '';
-                    const ms = style.split('ms')[0] === '';
+                    const webkit = style.split('webkit')[0] === ''
+                    const moz = style.split('moz')[0] === ''
+                    const ms = style.split('ms')[0] === ''
 
-                    if (letter === '-') return letter;
-                    if ((webkit || moz || ms) && index === 0) return `-${letter.toLowerCase()}`;
-                    if (letter === letter.toUpperCase()) return `-${letter.toLowerCase()}`;
-                    else return letter;
+                    if (letter === '-') return letter
+                    if ((webkit || moz || ms) && index === 0)
+                        return `-${letter.toLowerCase()}`
+                    if (letter === letter.toUpperCase()) return `-${letter.toLowerCase()}`
+                    else return letter
                 })
-                .join('');
-            return `${formattedName}: ${styles[style]};`;
+                .join('')
+            // @ts-ignore
+            return `${formattedName}: ${styles[style]};`
         })
-        .join('');
+        .join('')
 
     // Calculate -0.15s from the end of duration for animating out
-    let animation = `animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${duration / 1000 -
-        0.15}s reverse forwards;`;
+    let animation
 
-    return (formatted += animation);
-};
+    if (duration) {
+        animation = `animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${
+            duration / 1000 - 0.15
+        }s reverse forwards;`
+    }
+
+    return (formatted += animation)
+}
 
 // Append minified stylesheet to document head
-export const appendStylesheet = options => {
+export function appendStylesheet(options: Options): void {
     // Format style properties/values
-    let properties = formatCssProperties(options.styles, options.duration);
-    let oppositePositionX;
+    let properties = formatCssProperties(options.styles, options.duration)
+    let oppositePositionX
 
-    if (options.positionX === 'left') oppositePositionX = 'right';
-    else oppositePositionX = 'left';
+    oppositePositionX = options.positionX === 'left' ? 'right' : 'left'
 
     // Stylesheet content
     let styles = `
@@ -185,15 +197,15 @@ export const appendStylesheet = options => {
                 padding: 8px 30px;
             }
         }
-    `;
+    `
 
     // Create stylesheet
-    const stylesheet = document.createElement('style');
+    const stylesheet = document.createElement('style')
 
     // Set stylesheet content
-    stylesheet.innerHTML = minify(styles);
-    stylesheet.type = 'text/css';
+    stylesheet.innerHTML = minify(styles)
+    stylesheet.type = 'text/css'
 
     // Append
-    document.head.appendChild(stylesheet);
-};
+    document.head.appendChild(stylesheet)
+}
