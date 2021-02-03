@@ -14,13 +14,14 @@
         "pub-major": "npm version major && npm publish",
         "postinstall": "node install.js"
     },
-    "main": "dist/dkToast.umd.min.js",
+    "main": "index.js",
     "files": [
         "dist/dkToast.umd.min.js",
         "dist/dkToast.umd.min.js.map",
         "dist/toast.d.ts",
         "dist/types.ts",
-        "install.js"
+        "install.js",
+        "index.js"
     ],
     "types": "dist/toast.d.ts",
     "devDependencies": {
