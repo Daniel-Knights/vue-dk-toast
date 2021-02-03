@@ -1,4 +1,4 @@
-import type { LocalOptions, Options } from './types'
+import type { Options, LocalOptions } from './types'
 
 export function validateOptions(options: Options): boolean {
     let valid = true
