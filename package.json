@@ -18,7 +18,8 @@
     "files": [
         "dist/dkToast.umd.min.js",
         "dist/dkToast.umd.min.js.map",
-        "dist/types.ts"
+        "dist/types.ts",
+        "install.js"
     ],
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.33.0",
