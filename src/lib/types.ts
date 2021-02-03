@@ -1,7 +1,3 @@
-export type Toast = {
-    (text: string, localOptions?: LocalOptions): void
-}
-
 export interface Options {
     positionX?: string
     positionY?: string
