@@ -16,7 +16,6 @@
     "main": "dist/dkToast.umd.min.js",
     "files": [
         "dist/dkToast.umd.min.js",
-        "dist/dkToast.umd.min.js.map",
         "dist/toast.d.ts"
     ],
     "types": "dist/toast.d.ts",
