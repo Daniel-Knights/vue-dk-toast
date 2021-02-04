@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
 // eslint-disable-next-line
-import type { Toast } from '../dist/types'
+import type { Toast } from './lib/toast.d'
 
 export default defineComponent({
     name: 'App',
