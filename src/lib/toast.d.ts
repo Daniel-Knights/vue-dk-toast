@@ -19,20 +19,20 @@ declare module '@vue/runtime-core' {
     }
 }
 
-declare module 'vue-dk-toast' {}
-
-/**
- * @param options Optional global config for toast notifications.
- *
- * ---
- * **Options:**
- * @property `duration` - Time in milliseconds before hiding the toast notification.
- * @property `positionX` - 'left' or 'right'.
- * @property `positionY` - 'top' or 'bottom'.
- * @property `styles` - CSS key/value pairs.
- */
-declare const DKToast: Plugin
-export default DKToast
+declare module 'vue-dk-toast' {
+    /**
+     * @param options Optional global config for toast notifications.
+     *
+     * ---
+     * **Options:**
+     * @property `duration` - Time in milliseconds before hiding the toast notification.
+     * @property `positionX` - 'left' or 'right'.
+     * @property `positionY` - 'top' or 'bottom'.
+     * @property `styles` - CSS key/value pairs.
+     */
+    const DKToast: Plugin
+    export = DKToast
+}
 
 interface LocalOptions {
     slot?: string
