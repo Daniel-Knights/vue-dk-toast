@@ -49,6 +49,12 @@ CLI
 npm i vue-dk-toast
 ```
 
+_or..._
+
+```bash
+yarn add vue-dk-toast
+```
+
 CDN
 
 ```html
@@ -84,7 +90,7 @@ app.mount('#app')
 this.$toast('Simple!')
 ```
 
-_Or..._
+_or..._
 
 ```js
 @click="$toast('Simple!')"
