@@ -11,15 +11,13 @@
         "lib": "vue-cli-service build --target lib --name dkToast ./src/lib/toast.ts && cp src/lib/toast.d.ts dist/toast.d.ts",
         "pub": "npm version patch && npm publish",
         "pub-minor": "npm version minor && npm publish",
-        "pub-major": "npm version major && npm publish",
-        "postinstall": "node install.js"
+        "pub-major": "npm version major && npm publish"
     },
     "main": "dist/dkToast.umd.min.js",
     "files": [
         "dist/dkToast.umd.min.js",
         "dist/dkToast.umd.min.js.map",
-        "dist/toast.d.ts",
-        "install.js"
+        "dist/toast.d.ts"
     ],
     "types": "dist/toast.d.ts",
     "devDependencies": {
