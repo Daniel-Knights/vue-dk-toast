@@ -98,14 +98,18 @@ _or..._
 
 **Composition API:**
 
-```js
+```vue
+<script>
 import { inject } from 'vue'
-...
-setup() {
-    const toast = inject('$toast')
 
-    toast('Simple!')
+export default {
+    setup() {
+        const toast = inject('$toast')
+
+        toast('Simple!')
+    }
 }
+</script>
 ```
 
 ## Options
@@ -144,16 +148,19 @@ this.$toast('Simple!', {
 
 **`vue-dk-toast`** comes with it's own built-in types for most cases, the exception being with the Composition API:
 
-```ts
-import { inject } from 'vue'
+```vue
+<script lang="ts">
+import { defineComponent, inject } from 'vue'
 import type { Toast } from 'vue-dk-toast'
-...
-setup() {
-    const toast = inject<Toast>('$toast')
 
-    if (toast) toast('Simple!')
-}
+export default defineComponent({
+    setup() {
+        const toast = inject<Toast>('$toast')
 
+        if (toast) toast('Simple!')
+    }
+})
+</script>
 ```
 
 ---
