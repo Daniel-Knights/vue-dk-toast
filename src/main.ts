@@ -6,8 +6,8 @@ const app = createApp(App)
 
 app.use(DKToast, {
     duration: 10000,
-    // positionY: 'top',
-    positionX: 'right'
+    positionY: 'bottom',
+    positionX: 'center'
     // styles: { border: '10px solid' },
 })
 

@@ -78,7 +78,7 @@ export function formatCssProperties(
 export function appendStylesheet(options: Options): void {
     // Format style properties/values
     let properties = formatCssProperties(options.styles, options.duration)
-    let oppositePositionX
+    let oppositePositionX: string
     const center = options.positionX === 'center'
 
     if (options.positionX === 'left') {
@@ -93,13 +93,19 @@ export function appendStylesheet(options: Options): void {
             display: flex;
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
-                -ms-flex-direction: column;
-                    flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
             position: fixed;
             ${options.positionY}: 40px;
-            ${center ? 'right: 50%' : options.positionX + ': 60px'};
-            ${center ? 'transform: translate(50%);' : ''}
-            margin-${oppositePositionX}: 60px;
+            ${
+                center
+                    ? 'right: 50%;' + 'transform: translate(50%);'
+                    : options.positionX +
+                      ': 60px;' +
+                      'margin-' +
+                      oppositePositionX +
+                      ': 60px;'
+            }
             z-index: 100;
         }
         .dk__toast {
@@ -108,19 +114,19 @@ export function appendStylesheet(options: Options): void {
             display: -ms-flexbox;
             display: flex;
             -ms-flex-pack: distribute;
-                justify-content: space-around;
+            justify-content: space-around;
             -webkit-box-align: center;
-                -ms-flex-align: center;
-                    align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
             margin: 5px 0;
             padding: 7px 40px;
-            min-width: 100px;
+            min-width: 170px;
             font: 17px Avenir, sans-serif;
             text-align: center;
             border-radius: 5px;
             background: #fff;
             -webkit-box-shadow: 0 1px 3px #000;
-                    box-shadow: 0 1px 3px #000;
+            box-shadow: 0 1px 3px #000;
             -webkit-transition: opacity 0.25s;
             -o-transition: opacity 0.25s;
             transition: opacity 0.25s;
@@ -161,24 +167,24 @@ export function appendStylesheet(options: Options): void {
         @-webkit-keyframes dk__toast-in {
             from {
                 -webkit-transform: translateY(100%);
-                        transform: translateY(100%);
+                transform: translateY(100%);
                 opacity: 0;
             }
             to {
                 -webkit-transform: translateY(0);
-                        transform: translateY(0);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
         @keyframes dk__toast-in {
             from {
                 -webkit-transform: translateY(100%);
-                        transform: translateY(100%);
+                transform: translateY(100%);
                 opacity: 0;
             }
             to {
                 -webkit-transform: translateY(0);
-                        transform: translateY(0);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
@@ -187,17 +193,14 @@ export function appendStylesheet(options: Options): void {
                 right: 0;
                 left: 0;
                 ${options.positionY}: 10px;
-                bottom: 10px;
                 margin: 0 auto;
                 width: 90%;
+                transform: none;
             }
             .dk__toast {
                 padding: 10px 40px;
             }
             .dk__icon-only {
-                -webkit-box-flex: 1;
-                    -ms-flex: 1;
-                        flex: 1;
                 padding: 8px 30px;
             }
         }
