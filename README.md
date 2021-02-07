@@ -13,6 +13,7 @@
 -   [Options](#options)
 -   [Local Options](#local-options)
 -   [TypeScript Support](#typescript-support)
+-   [Security](#security)
 
 ```
       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -59,6 +60,12 @@ CDN
 
 ```html
 <script src="https://unpkg.com/vue-dk-toast"></script>
+```
+
+It's recommended you use a specific version number to guard against breaking changes and load the script faster:
+
+```html
+<script src="https://unpkg.com/vue-dk-toast@1.3.0"></script>
 ```
 
 ## Import
@@ -119,7 +126,7 @@ createApp(App)
     .use(DKToast, {
         duration: 5000,
         positionY: 'bottom', // 'top' or 'bottom'
-        positionX: 'right', // 'right' or 'left'
+        positionX: 'right', // 'left', 'right' or 'center'
         styles: {
             color: '#000',
             backgroundColor: '#fff'
@@ -134,7 +141,6 @@ createApp(App)
 ```js
 this.$toast('Simple!', {
     duration: 1000,
-    // Position not yet supported
     styles: {
         borderRadius: '25px'
     },
@@ -162,6 +168,10 @@ export default defineComponent({
 })
 </script>
 ```
+
+## Security
+
+For `slotRight` and `slotLeft` to work, it uses `innerHTML` to set the content. `innerHTML` is not secure as it adds the possibility for XSS attacks. If you set any user-inputted tags with these options, make sure you sanitise the string beforehand, else, adding something like `<img src=x onerror="alert("XSS Attack!")" />` would run. You can use a library like [`DOMPurify`](https://www.npmjs.com/package/dompurify) to handle this for you.
 
 ---
 
