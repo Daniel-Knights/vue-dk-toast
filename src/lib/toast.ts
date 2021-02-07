@@ -10,7 +10,7 @@ import renderToast from './render'
  * ---
  * **Options:**
  * @property `duration` - Time in milliseconds before hiding the toast notification.
- * @property `positionX` - 'left' or 'right'.
+ * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
  */
@@ -22,7 +22,7 @@ const toastPlugin = {
         if (!options.positionY) options.positionY = 'bottom'
         if (!options.positionX) options.positionX = 'right'
 
-        if (!validateOptions(options)) return
+        validateOptions(options)
         appendStylesheet(options)
         renderToast(app, options)
     }

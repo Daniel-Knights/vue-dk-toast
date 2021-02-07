@@ -1,6 +1,6 @@
 export interface Options {
-    positionX?: string
-    positionY?: string
+    positionX?: 'left' | 'right' | 'center'
+    positionY?: 'top' | 'bottom'
     duration?: number
     styles?: Record<string, string>
 }

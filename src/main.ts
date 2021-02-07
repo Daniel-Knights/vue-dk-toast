@@ -5,9 +5,9 @@ import DKToast from './lib/toast'
 const app = createApp(App)
 
 app.use(DKToast, {
-    duration: 10000
+    duration: 10000,
     // positionY: 'top',
-    // positionX: 'left',
+    positionX: 'right'
     // styles: { border: '10px solid' },
 })
 

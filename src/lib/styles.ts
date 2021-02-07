@@ -79,8 +79,11 @@ export function appendStylesheet(options: Options): void {
     // Format style properties/values
     let properties = formatCssProperties(options.styles, options.duration)
     let oppositePositionX
+    const center = options.positionX === 'center'
 
-    oppositePositionX = options.positionX === 'left' ? 'right' : 'left'
+    if (options.positionX === 'left') {
+        oppositePositionX = 'right'
+    } else oppositePositionX = 'left'
 
     // Stylesheet content
     let styles = `
@@ -94,7 +97,8 @@ export function appendStylesheet(options: Options): void {
                     flex-direction: column;
             position: fixed;
             ${options.positionY}: 40px;
-            ${options.positionX}: 60px;
+            ${center ? 'right: 50%' : options.positionX + ': 60px'};
+            ${center ? 'transform: translate(50%);' : ''}
             margin-${oppositePositionX}: 60px;
             z-index: 100;
         }
@@ -203,7 +207,7 @@ export function appendStylesheet(options: Options): void {
     const stylesheet = document.createElement('style')
 
     // Set stylesheet content
-    stylesheet.innerHTML = minify(styles)
+    stylesheet.textContent = minify(styles)
     stylesheet.type = 'text/css'
 
     // Append

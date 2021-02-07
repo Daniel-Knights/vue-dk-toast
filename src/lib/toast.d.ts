@@ -25,7 +25,7 @@ declare module '@vue/runtime-core' {
  * ---
  * **Options:**
  * @property `duration` - Time in milliseconds before hiding the toast notification.
- * @property `positionX` - 'left' or 'right'.
+ * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
  */

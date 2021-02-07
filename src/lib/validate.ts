@@ -1,24 +1,23 @@
 import type { Options, LocalOptions } from './types'
 
-export function validateOptions(options: Options): boolean {
-    let valid = true
+export function validateOptions(options: Options): void {
     // Invalid position error-handling
-    if (options.positionX === 'top' || options.positionX === 'bottom') {
+    if (
+        options.positionX !== 'left' &&
+        options.positionX !== 'right' &&
+        options.positionX !== 'center'
+    ) {
         // eslint-disable-next-line
         console.error(
-            `vue-dk-toast [Error]: positionX must be either "left" or "right", received "${options.positionX}"`
+            `vue-dk-toast [Error]: positionX must be either "left", "right" or "center", received "${options.positionX}"`
         )
-        valid = false
     }
-    if (options.positionY === 'left' || options.positionY === 'right') {
+    if (options.positionY !== 'top' && options.positionY !== 'bottom') {
         // eslint-disable-next-line
         console.error(
             `vue-dk-toast [Error]: positionY must be either "top" or "bottom", received "${options.positionY}"`
         )
-        valid = false
     }
-
-    return valid
 }
 
 export function validateLocalOptions(text: string, options: LocalOptions): boolean {
