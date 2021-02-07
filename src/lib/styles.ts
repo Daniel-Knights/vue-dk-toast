@@ -123,6 +123,7 @@ export function appendStylesheet(options: Options): void {
             min-width: 170px;
             font: 17px Avenir, sans-serif;
             text-align: center;
+            word-break: break-word;
             border-radius: 5px;
             background: #fff;
             -webkit-box-shadow: 0 1px 3px #000;
