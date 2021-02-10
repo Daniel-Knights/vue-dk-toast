@@ -69,12 +69,25 @@ export default defineComponent({
                 slotLeft: '<i class="fa fa-thumbs-up"></i>',
                 slotRight: '<span class="material-icons">thumb_up</span>'
             })
+            this.$toast('ERROR: SOMETHING HAPPENED', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-exclamation"></i>',
+                slotRight: '<i class="fa fa-exclamation"></i>',
+                class: 'error'
+            })
         }
     }
 })
 </script>
 
 <style>
+.toast.error {
+    background-color: red;
+    color: #fff;
+}
+.toast {
+    color: purple;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

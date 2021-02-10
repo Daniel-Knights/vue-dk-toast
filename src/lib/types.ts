@@ -3,6 +3,7 @@ export interface Options {
     positionY?: 'top' | 'bottom'
     duration?: number
     styles?: Record<string, string>
+    class?: string
 }
 
 export interface LocalOptions {
@@ -11,4 +12,5 @@ export interface LocalOptions {
     slotRight?: string
     duration?: number
     styles?: Record<string, string>
+    class?: string
 }

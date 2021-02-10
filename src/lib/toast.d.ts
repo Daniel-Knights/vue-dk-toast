@@ -9,11 +9,12 @@ declare module '@vue/runtime-core' {
          *
          * ---
          * **Options:**
+         * @property `duration` - Time in milliseconds before hiding the toast notification.
+         * @property `styles` - CSS key/value pairs.
          * @property `slot` - (deprecated) Slot for displaying HTML on the right side of provided text.
          * @property `slotLeft` - Slot for displaying HTML on the left-side of provided text.
          * @property `slotRight` - Slot for displaying HTML on the right-side of provided text.
-         * @property `styles` - CSS key/value pairs.
-         * @property `duration` - Time in milliseconds before hiding the toast notification.
+         * @property `class` - Local class to be added to individual toast.
          */
         $toast: Toast
     }
@@ -28,6 +29,7 @@ declare module '@vue/runtime-core' {
  * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
+ * @property `class` - Global class to be added to each toast.
  */
 declare const DKToast: Plugin
 export default DKToast
@@ -38,6 +40,7 @@ interface LocalOptions {
     slotRight?: string
     duration?: number
     styles?: Record<string, string>
+    class?: string
 }
 
 /**

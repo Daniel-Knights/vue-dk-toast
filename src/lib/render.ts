@@ -40,6 +40,8 @@ function renderToast(app: App, options: Options): void {
         if (!validateLocalOptions(text, localOptions)) return
 
         toast.className = 'dk__toast'
+        if (options.class) toast.classList.add(options.class)
+        if (localOptions.class) toast.classList.add(localOptions.class)
 
         // If text
         if (text) toast.textContent = text
