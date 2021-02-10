@@ -65,7 +65,7 @@ CDN
 It's recommended you use a specific version number to guard against breaking changes and load the script faster:
 
 ```html
-<script src="https://unpkg.com/vue-dk-toast@1.5.3"></script>
+<script src="https://unpkg.com/vue-dk-toast@1.5.4"></script>
 ```
 
 ## Import
@@ -121,6 +121,14 @@ export default {
 
 ## Options
 
+| Option      | Type     | Description                                                              |
+| ----------- | -------- | ------------------------------------------------------------------------ |
+| `duration`  | `Number` | Milliseconds before hiding toast.                                        |
+| `positionY` | `String` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
+| `positionX` | `String` | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
+| `styles`    | `Object` | CSS key/value pairs - supports vendor prefixes.                          |
+| `class`     | `String` | CSS class to be added to every toast.                                    |
+
 ```js
 createApp(App)
     .use(DKToast, {
@@ -137,15 +145,16 @@ createApp(App)
     .mount('#app')
 ```
 
-| Option      | Type     | Description                                                              |
-| ----------- | -------- | ------------------------------------------------------------------------ |
-| `duration`  | `Number` | Milliseconds before hiding toast.                                        |
-| `positionY` | `String` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
-| `positionX` | `String` | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
-| `styles`    | `Object` | CSS key/value pairs - supports vendor prefixes.                          |
-| `class`     | `String` | CSS class to be added to every toast.                                    |
-
 ## Local Options
+
+| Option      | Type     | Description                                                  |
+| ----------- | -------- | ------------------------------------------------------------ |
+| `duration`  | `Number` | Milliseconds before hiding toast. Overrides global duration. |
+| `styles`    | `Object` | CSS key/value pairs. Supports vendor prefixes.               |
+| `slotLeft`  | `String` | Any valid HTML as a string.                                  |
+| `slotRight` | `String` | Any valid HTML as a string.                                  |
+| `class`     | `String` | CSS class to be added to this toast only.                    |
+| `type`      | `String` | Default helper class - `success`, `error` or `passive`.      |
 
 ```js
 this.$toast('Simple!', {
@@ -160,15 +169,6 @@ this.$toast('Simple!', {
     type: 'success' // Default classes: 'success', 'error' and 'passive'
 })
 ```
-
-| Option      | Type     | Description                                                  |
-| ----------- | -------- | ------------------------------------------------------------ |
-| `duration`  | `Number` | Milliseconds before hiding toast. Overrides global duration. |
-| `styles`    | `Object` | CSS key/value pairs. Supports vendor prefixes.               |
-| `slotLeft`  | `String` | Any valid HTML as a string.                                  |
-| `slotRight` | `String` | Any valid HTML as a string.                                  |
-| `class`     | `String` | CSS class to be added to this toast only.                    |
-| `type`      | `String` | Default helper class - `success`, `error` or `passive`.      |
 
 ## TypeScript Support
 
