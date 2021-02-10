@@ -4,6 +4,7 @@ export interface Options {
     duration?: number
     styles?: Record<string, string>
     class?: string
+    type?: string
 }
 
 export interface LocalOptions {
@@ -13,4 +14,5 @@ export interface LocalOptions {
     duration?: number
     styles?: Record<string, string>
     class?: string
+    type?: string
 }

@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
          * @property `slotLeft` - Slot for displaying HTML on the left-side of provided text.
          * @property `slotRight` - Slot for displaying HTML on the right-side of provided text.
          * @property `class` - Local class to be added to individual toast.
+         * @property `type` - Default classes for `success`, `error` and `passive`.
          */
         $toast: Toast
     }
@@ -41,6 +42,7 @@ interface LocalOptions {
     duration?: number
     styles?: Record<string, string>
     class?: string
+    type?: string
 }
 
 /**

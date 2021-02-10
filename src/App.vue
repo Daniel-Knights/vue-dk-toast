@@ -73,7 +73,19 @@ export default defineComponent({
                 duration: 100000,
                 slotLeft: '<i class="fa fa-exclamation"></i>',
                 slotRight: '<i class="fa fa-exclamation"></i>',
-                class: 'error'
+                type: 'error'
+            })
+            this.$toast('SUCCESS: SOMETHING HAPPENED', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-exclamation"></i>',
+                slotRight: '<i class="fa fa-exclamation"></i>',
+                type: 'success'
+            })
+            this.$toast('PASSIVE: SOMETHING HAPPENED', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-exclamation"></i>',
+                slotRight: '<i class="fa fa-exclamation"></i>',
+                type: 'passive'
             })
         }
     }
@@ -81,10 +93,6 @@ export default defineComponent({
 </script>
 
 <style>
-.toast.error {
-    background-color: red;
-    color: #fff;
-}
 .toast {
     color: purple;
 }

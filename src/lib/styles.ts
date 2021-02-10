@@ -170,6 +170,18 @@ export function appendStylesheet(options: Options): void {
             left: unset;
             padding: 4px;
         }
+        .dk__toast.dk__error {
+            background-color: rgb(255, 0, 0);
+            color: #fff;
+        }
+        .dk__toast.dk__success {
+            background-color: rgb(31, 218, 56);
+            color: #fff;
+        }
+        .dk__toast.dk__passive {
+            background-color: rgb(31, 59, 218);
+            color: #fff;
+        }
         @-webkit-keyframes dk__toast-in {
             from {
                 -webkit-transform: translateY(100%);

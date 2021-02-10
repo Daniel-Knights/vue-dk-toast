@@ -42,6 +42,7 @@ function renderToast(app: App, options: Options): void {
         toast.className = 'dk__toast'
         if (options.class) toast.classList.add(options.class)
         if (localOptions.class) toast.classList.add(localOptions.class)
+        if (localOptions.type) toast.classList.add(`dk__${localOptions.type}`)
 
         // If text
         if (text) toast.textContent = text
