@@ -65,7 +65,7 @@ CDN
 It's recommended you use a specific version number to guard against breaking changes and load the script faster:
 
 ```html
-<script src="https://unpkg.com/vue-dk-toast@1.3.0"></script>
+<script src="https://unpkg.com/vue-dk-toast@1.5.3"></script>
 ```
 
 ## Import
