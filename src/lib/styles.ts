@@ -77,16 +77,21 @@ export function formatCssProperties(
 // Append minified stylesheet to document head
 export function appendStylesheet(options: Options): void {
     // Format style properties/values
-    let properties = formatCssProperties(options.styles, options.duration)
-    let oppositePositionX: string
+    const properties = formatCssProperties(options.styles, options.duration)
     const center = options.positionX === 'center'
+    let oppositePositionX: string
 
     if (options.positionX === 'left') {
         oppositePositionX = 'right'
     } else oppositePositionX = 'left'
 
+    // Create stylesheet
+    const stylesheet = document.createElement('style')
+
+    stylesheet.type = 'text/css'
+
     // Stylesheet content
-    let styles = `
+    stylesheet.textContent = minify(`
         .dk__toast-container {
             display: -webkit-box;
             display: -ms-flexbox;
@@ -205,14 +210,7 @@ export function appendStylesheet(options: Options): void {
                 padding: 8px 30px;
             }
         }
-    `
-
-    // Create stylesheet
-    const stylesheet = document.createElement('style')
-
-    // Set stylesheet content
-    stylesheet.textContent = minify(styles)
-    stylesheet.type = 'text/css'
+    `)
 
     // Append
     document.head.appendChild(stylesheet)

@@ -17,7 +17,6 @@ function renderToast(app: App, options: Options): void {
     document.body.appendChild(container)
 
     /**
-     *
      * @param text Text to display in toast notification.
      * @param localOptions Optional config for individual toast.
      *
