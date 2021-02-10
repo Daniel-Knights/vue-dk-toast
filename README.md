@@ -148,7 +148,8 @@ this.$toast('Simple!', {
     // Any valid HTML, intended for icons
     slotLeft: '<i class="fa fa-user"></i>', // Add icon to left
     slotRight: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
-    class: 'local-class' // Added to this toast only
+    class: 'local-class', // Added to this toast only
+    type: 'success' // Default classes: 'success', 'error' and 'passive'
 })
 ```
 
