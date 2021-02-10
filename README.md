@@ -137,6 +137,14 @@ createApp(App)
     .mount('#app')
 ```
 
+| Option      | Type     | Description                                                              |
+| ----------- | -------- | ------------------------------------------------------------------------ |
+| `duration`  | `Number` | Milliseconds before hiding toast.                                        |
+| `positionY` | `String` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
+| `positionX` | `String` | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
+| `styles`    | `Object` | CSS key/value pairs - supports vendor prefixes.                          |
+| `class`     | `String` | CSS class to be added to every toast.                                    |
+
 ## Local Options
 
 ```js
@@ -152,6 +160,15 @@ this.$toast('Simple!', {
     type: 'success' // Default classes: 'success', 'error' and 'passive'
 })
 ```
+
+| Option      | Type     | Description                                                  |
+| ----------- | -------- | ------------------------------------------------------------ |
+| `duration`  | `Number` | Milliseconds before hiding toast. Overrides global duration. |
+| `styles`    | `Object` | CSS key/value pairs. Supports vendor prefixes.               |
+| `slotLeft`  | `String` | Any valid HTML as a string.                                  |
+| `slotRight` | `String` | Any valid HTML as a string.                                  |
+| `class`     | `String` | CSS class to be added to this toast only.                    |
+| `type`      | `String` | Default helper class - `success`, `error` or `passive`.      |
 
 ## TypeScript Support
 
