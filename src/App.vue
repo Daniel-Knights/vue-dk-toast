@@ -12,81 +12,99 @@ export default defineComponent({
     setup() {
         const toast = inject<Toast>('$toast')
 
-        if (toast) toast('provide')
+        if (toast) toast('provide', { positionX: 'left', positionY: 'top' })
     },
     methods: {
         toast(): void {
             // Error
             this.$toast('')
-            this.$toast('text only')
-            this.$toast('text with options', {
-                duration: 100000,
-                styles: { border: '1px solid' }
-            })
-            this.$toast('long text long text long text long text long text long text', {
-                duration: 100000,
-                styles: { border: '1px solid' }
-            })
-            this.$toast('text + right icon (deprecated)', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slot: '<i class="fa fa-thumbs-up"></i>'
-            })
-            this.$toast('text + left icon ', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>'
-            })
-            this.$toast('text + right + left icon', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<i class="fa fa-thumbs-up"></i>'
-            })
-            this.$toast('', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotRight: '<i class="fa fa-thumbs-up"></i>'
-            })
-            this.$toast('', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>'
-            })
-            this.$toast('', {
-                duration: 100000,
-                styles: { border: '1px solid' },
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<i class="fa fa-thumbs-up"></i>'
-            })
-            this.$toast('', {
-                duration: 100000,
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<span class="material-icons">thumb_up</span>'
-            })
-            this.$toast('mixed icons', {
-                duration: 100000,
-                slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                slotRight: '<span class="material-icons">thumb_up</span>'
-            })
-            this.$toast('ERROR: SOMETHING HAPPENED', {
-                duration: 100000,
-                slotLeft: '<i class="fa fa-exclamation"></i>',
-                slotRight: '<i class="fa fa-exclamation"></i>',
-                type: 'error'
-            })
-            this.$toast('SUCCESS: SOMETHING HAPPENED', {
-                duration: 100000,
-                slotLeft: '<i class="fa fa-exclamation"></i>',
-                slotRight: '<i class="fa fa-exclamation"></i>',
-                type: 'success'
-            })
-            this.$toast('PASSIVE: SOMETHING HAPPENED', {
-                duration: 100000,
-                slotLeft: '<i class="fa fa-exclamation"></i>',
-                slotRight: '<i class="fa fa-exclamation"></i>',
-                type: 'passive'
-            })
+            setTimeout(() => {
+                this.$toast('text only')
+            }, 1000)
+            setTimeout(() => {
+                this.$toast('text with options', {
+                    positionY: 'bottom',
+                    positionX: 'right'
+                })
+            }, 2000)
+            setTimeout(() => {
+                this.$toast(
+                    'long text long text long text long text long text long text',
+                    {
+                        positionY: 'bottom',
+                        positionX: 'left'
+                    }
+                )
+            }, 3000)
+            setTimeout(() => {
+                this.$toast('text + right icon (deprecated)', {
+                    slot: '<i class="fa fa-thumbs-up"></i>',
+                    positionY: 'top',
+                    positionX: 'right'
+                })
+            }, 4000)
+            setTimeout(() => {
+                this.$toast('text + left icon ', {
+                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                    positionY: 'top',
+                    positionX: 'center'
+                })
+            }, 5000)
+            setTimeout(() => {
+                this.$toast('text + right + left icon', {
+                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                    slotRight: '<i class="fa fa-thumbs-up"></i>'
+                })
+            }, 6000)
+            setTimeout(() => {
+                this.$toast('', {
+                    slotRight: '<i class="fa fa-thumbs-up"></i>'
+                })
+            }, 7000)
+            setTimeout(() => {
+                this.$toast('', {
+                    slotLeft: '<i class="fa fa-thumbs-up"></i>'
+                })
+            }, 8000)
+            setTimeout(() => {
+                this.$toast('', {
+                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                    slotRight: '<i class="fa fa-thumbs-up"></i>'
+                })
+            }, 9000)
+            setTimeout(() => {
+                this.$toast('', {
+                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                    slotRight: '<span class="material-icons">thumb_up</span>'
+                })
+            }, 10000)
+            setTimeout(() => {
+                this.$toast('mixed icons', {
+                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                    slotRight: '<span class="material-icons">thumb_up</span>'
+                })
+            }, 11000)
+            setTimeout(() => {
+                this.$toast('ERROR: SOMETHING HAPPENED', {
+                    slotLeft: '<i class="fa fa-exclamation"></i>',
+                    slotRight: '<i class="fa fa-exclamation"></i>',
+                    type: 'error'
+                })
+            }, 12000)
+            setTimeout(() => {
+                this.$toast('SUCCESS: SOMETHING HAPPENED', {
+                    slotLeft: '<i class="fa fa-exclamation"></i>',
+                    slotRight: '<i class="fa fa-exclamation"></i>',
+                    type: 'success'
+                })
+            }, 13000)
+            setTimeout(() => {
+                this.$toast('PASSIVE: SOMETHING HAPPENED', {
+                    slotLeft: '<i class="fa fa-exclamation"></i>',
+                    slotRight: '<i class="fa fa-exclamation"></i>',
+                    type: 'passive'
+                })
+            }, 14000)
         }
     }
 })
@@ -96,12 +114,16 @@ export default defineComponent({
 .toast {
     color: purple;
 }
+
+body {
+    background-color: #7b6df5;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: #fff;
     margin-top: 60px;
     height: 1000vh;
 }

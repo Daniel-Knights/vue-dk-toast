@@ -6,6 +6,7 @@ import { validateLocalOptions } from './validate'
 function renderToast(app: App, options: Options): void {
     // Render toast container
     const container = document.createElement('div')
+    const mobileContainer = document.createElement('div')
 
     // Set container attributes
     container.className = 'dk__toast-container'
@@ -13,21 +14,15 @@ function renderToast(app: App, options: Options): void {
     container.setAttribute('aria-live', 'polite')
     container.setAttribute('aria-atomic', 'false')
 
+    mobileContainer.className = 'dk__toast-mobile-container'
+    mobileContainer.setAttribute('role', 'status')
+    mobileContainer.setAttribute('aria-live', 'polite')
+    mobileContainer.setAttribute('aria-atomic', 'false')
+
     // Append
     document.body.appendChild(container)
+    document.body.appendChild(mobileContainer)
 
-    /**
-     * @param text Text to display in toast notification.
-     * @param localOptions Optional config for individual toast.
-     *
-     * ---
-     * **Options:**
-     * @property `slot` - (deprecated) Slot for displaying HTML on the right side of provided text.
-     * @property `slotLeft` - Slot for displaying HTML on the left-side of provided text.
-     * @property `slotRight` - Slot for displaying HTML on the right-side of provided text.
-     * @property `styles` - CSS key/value pairs.
-     * @property `duration` - Time in milliseconds before hiding the toast notification.
-     */
     function DKToast(text: string, localOptions?: LocalOptions): void {
         if (!localOptions) localOptions = {}
         const toast = document.createElement('div')
@@ -38,6 +33,32 @@ function renderToast(app: App, options: Options): void {
         let clicked: boolean
 
         if (!validateLocalOptions(text, localOptions)) return
+
+        const positions = {
+            y: localOptions.positionY || options.positionY,
+            x: localOptions.positionX || options.positionX
+        }
+
+        // Render toast section
+        const section =
+            document.querySelector(`.dk__toast-${positions.y}-${positions.x}`) ||
+            document.createElement('div')
+
+        if (section.children.length >= (options.max as number)) {
+            section.removeChild(section.firstChild as Element)
+            mobileContainer.removeChild(mobileContainer.firstChild as Element)
+        }
+
+        if (!section.className) {
+            // Set section attributes
+            section.className = `dk__toast-section dk__toast-${positions.y}-${positions.x}`
+            section.setAttribute('role', 'status')
+            section.setAttribute('aria-live', 'polite')
+            section.setAttribute('aria-atomic', 'false')
+
+            // Append
+            container.appendChild(section)
+        }
 
         toast.className = 'dk__toast'
         if (options.class) toast.classList.add(options.class)
@@ -62,15 +83,35 @@ function renderToast(app: App, options: Options): void {
         styles = localOptions.styles ? localOptions.styles : options.styles
         toast.setAttribute('style', formatCssProperties(styles, duration))
 
-        // Remove toast on click
-        toast.addEventListener('click', () => {
-            clicked = true
-            container.removeChild(toast)
-        })
+        const mobileClone = toast.cloneNode(true)
 
-        container.appendChild(toast)
+        function clickHandler(): void {
+            clicked = true
+
+            if ([...section.children].includes(toast)) {
+                section.removeChild(toast)
+            }
+            if ([...mobileContainer.children].includes(mobileClone as Element)) {
+                mobileContainer.removeChild(mobileClone)
+            }
+        }
+
+        // Remove toast on click
+        toast.addEventListener('click', clickHandler)
+        mobileClone.addEventListener('click', clickHandler)
+
+        section.appendChild(toast)
+        mobileContainer.appendChild(mobileClone)
+
         setTimeout(() => {
-            if (!clicked) container.removeChild(toast)
+            if (clicked) return
+
+            if ([...section.children].includes(toast)) {
+                section.removeChild(toast)
+            }
+            if ([...mobileContainer.children].includes(mobileClone as Element)) {
+                mobileContainer.removeChild(mobileClone)
+            }
         }, duration)
     }
 

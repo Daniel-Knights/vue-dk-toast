@@ -63,22 +63,19 @@ export function formatCssProperties(
         .join('')
 
     // Calculate -0.15s from the end of duration for animating out
-    let animation
+    let animationDelay
 
     if (duration) {
-        animation = `animation: dk__toast-in 0.15s, dk__toast-in 0.15s ${
-            duration / 1000 - 0.15
-        }s reverse forwards;`
+        animationDelay = `animation-delay: 0s, ${duration / 1000 - 0.15}s;`
     }
 
-    return (formatted += animation)
+    return (formatted += animationDelay)
 }
 
 // Append minified stylesheet to document head
 export function appendStylesheet(options: Options): void {
     // Format style properties/values
     const properties = formatCssProperties(options.styles, options.duration)
-    const center = options.positionX === 'center'
     let oppositePositionX: string
 
     if (options.positionX === 'left') {
@@ -93,6 +90,23 @@ export function appendStylesheet(options: Options): void {
     // Stylesheet content
     stylesheet.textContent = minify(`
         .dk__toast-container {
+            pointer-events: none;
+            display: grid;
+            grid-template-areas: "top-left top-center top-right" "bottom-left bottom-center bottom-right";
+            grid-template-columns: repeat(3, 33%);
+            grid-template-rows: repeat(2, 50%);
+            gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            height: calc(100vh - 40px);
+            width: calc(100vw - 40px);
+        }
+        .dk__toast-mobile-container {
+            visibility: hidden;
+        }
+        .dk__toast-section {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -100,21 +114,11 @@ export function appendStylesheet(options: Options): void {
             -webkit-box-direction: normal;
             -ms-flex-direction: column;
             flex-direction: column;
-            position: fixed;
-            ${options.positionY}: 40px;
-            ${
-                center
-                    ? 'right: 50%;' + 'transform: translate(50%);'
-                    : options.positionX +
-                      ': 60px;' +
-                      'margin-' +
-                      oppositePositionX +
-                      ': 60px;'
-            }
             z-index: 100;
         }
         .dk__toast {
             cursor: pointer;
+            pointer-events: all;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -136,7 +140,29 @@ export function appendStylesheet(options: Options): void {
             -webkit-transition: opacity 0.25s;
             -o-transition: opacity 0.25s;
             transition: opacity 0.25s;
+            animation: dk__toast-in 0.15s, dk__toast-in 0.15s reverse forwards;
             ${properties || ''}
+        }
+        .dk__toast-top-left {
+            grid-area: top-left;
+        }
+        .dk__toast-top-center {
+            grid-area: top-center;
+        }
+        .dk__toast-top-right {
+            grid-area: top-right;
+        }
+        .dk__toast-bottom-left {
+            grid-area: bottom-left;
+            justify-content: flex-end;
+        }
+        .dk__toast-bottom-center {
+            grid-area: bottom-center;
+            justify-content: flex-end;
+        }
+        .dk__toast-bottom-right {
+            grid-area: bottom-right;
+            justify-content: flex-end;
         }
         .dk__toast:hover {
             opacity: 0.7;
@@ -206,8 +232,26 @@ export function appendStylesheet(options: Options): void {
                 opacity: 1;
             }
         }
-        @media only screen and (max-width: 450px) {
+        @media only screen and (max-width: 810px) {
             .dk__toast-container {
+                visibility: hidden;
+            }
+            .dk__toast-mobile-container {
+                pointer-events: none;
+                visibility: visible;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 20px;
+                height: calc(100vh - 40px);
+                width: calc(100vw - 40px);
+            }
+        }
+        @media only screen and (max-width: 450px) {
+            .dk__toast-section {
                 right: 0;
                 left: 0;
                 ${options.positionY}: 10px;

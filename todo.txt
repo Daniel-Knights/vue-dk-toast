@@ -1,1 +1,3 @@
-Add local positioning
+Global option to turn off local positioning?
+indefinite option
+disable click option

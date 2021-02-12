@@ -5,7 +5,7 @@ import DKToast from './lib/toast'
 const app = createApp(App)
 
 app.use(DKToast, {
-    duration: 10000,
+    duration: 5000,
     positionY: 'bottom',
     positionX: 'center',
     class: 'toast'

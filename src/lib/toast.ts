@@ -13,6 +13,8 @@ import renderToast from './render'
  * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
+ * @property `class` - CSS class to be added to every toast.
+ * @property `max` - Max number of toasts allowed per-section at any one time.
  */
 const toastPlugin = {
     install: (app: App, options: Options): void => {
@@ -21,6 +23,7 @@ const toastPlugin = {
         if (!options.duration) options.duration = 5000
         if (!options.positionY) options.positionY = 'bottom'
         if (!options.positionX) options.positionX = 'right'
+        if (!options.max) options.max = 5
 
         validateOptions(options)
         appendStylesheet(options)

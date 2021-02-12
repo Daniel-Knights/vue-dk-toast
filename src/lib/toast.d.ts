@@ -31,6 +31,7 @@ declare module '@vue/runtime-core' {
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
  * @property `class` - Global class to be added to each toast.
+ * @property `max` - Max number of toasts allowed per-section at any one time.
  */
 declare const DKToast: Plugin
 export default DKToast
@@ -40,9 +41,11 @@ interface LocalOptions {
     slotLeft?: string
     slotRight?: string
     duration?: number
+    positionX?: 'left' | 'right' | 'center'
+    positionY?: 'top' | 'bottom'
     styles?: Record<string, string>
     class?: string
-    type?: string
+    type?: 'error' | 'success' | 'passive'
 }
 
 /**
