@@ -1,6 +1,6 @@
 import type { Options } from './types'
 
-// Minify CSS
+/** Minify CSS */
 function minify(styles: string): string {
     let selector = false
     let value = false
@@ -33,7 +33,7 @@ function minify(styles: string): string {
     return minified
 }
 
-// Format CSS from camelCase
+/** Format CSS from camelCase */
 export function formatCssProperties(
     styles?: Record<string, string>,
     duration?: number | false
@@ -72,7 +72,7 @@ export function formatCssProperties(
     return formatted
 }
 
-// Append minified stylesheet to document head
+/** Append minified stylesheet to document head */
 export function appendStylesheet(options: Options): void {
     const { duration, styles, positionY } = options
     // Format style properties/values

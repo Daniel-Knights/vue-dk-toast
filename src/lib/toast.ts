@@ -9,12 +9,13 @@ import renderToast from './render'
  *
  * ---
  * **Options:**
+ * @property `class` - CSS class to be added to every toast.
+ * @property `disableClick?: boolean`
  * @property `duration` - Time in milliseconds before hiding the toast notification.
+ * @property `max` - Max number of toasts allowed per-section at any one time.
  * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
- * @property `class` - CSS class to be added to every toast.
- * @property `max` - Max number of toasts allowed per-section at any one time.
  */
 const toastPlugin = {
     install: (app: App, options: Options): void => {

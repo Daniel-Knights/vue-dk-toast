@@ -5,33 +5,71 @@ import { validateLocalOptions } from './validate'
 
 const toastQueue: Array<[Element, Element]> = []
 
-function renderToast(app: App, options: Options): void {
-    // Render toast container
+function formatAndMountContainer(el: Element, className: string, target: Element): void {
+    const attributes = [
+        ['role', 'status'],
+        ['aria-live', 'polite'],
+        ['aria-atomic', 'false']
+    ]
+
+    attributes.forEach((attr) => {
+        el.setAttribute(attr[0], attr[1])
+    })
+
+    el.className = className
+    target.appendChild(el)
+}
+
+function formatToastFromOptions(
+    text: string,
+    options: Options,
+    localOptions: LocalOptions,
+    duration?: number | false
+): Element {
+    const toast = document.createElement('div')
+    const left = localOptions.slotLeft
+    const right = localOptions.slot || localOptions.slotRight
+
+    // Add classes
+    toast.className = 'dk__toast'
+    if (options.class) toast.classList.add(options.class)
+    if (localOptions.class) toast.classList.add(localOptions.class)
+    if (localOptions.type) toast.classList.add(`dk__${localOptions.type}`)
+
+    // If text
+    if (text) toast.textContent = text
+    // If left slot
+    if (left) {
+        toast.innerHTML = `<div class="dk__icon-left">${left}</div>` + toast.innerHTML
+    }
+    // If right slot
+    if (right) {
+        toast.innerHTML += `<div class="dk__icon-right">${right}</div>`
+    }
+    // If slot only
+    if (!text && (left || right)) toast.classList.add('dk__icon-only')
+
+    const styles = localOptions.styles ? localOptions.styles : options.styles
+    toast.setAttribute('style', formatCssProperties(styles, duration))
+
+    if (localOptions.disableClick) {
+        // Prevent hover styling
+        toast.style.cursor = 'default'
+        toast.style.opacity = '1'
+    }
+
+    return toast
+}
+
+function toastPlugin(app: App, options: Options): void {
     const container = document.createElement('div')
     const mobileContainer = document.createElement('div')
 
-    // Set container attributes
-    container.className = 'dk__toast-container'
-    container.setAttribute('role', 'status')
-    container.setAttribute('aria-live', 'polite')
-    container.setAttribute('aria-atomic', 'false')
+    formatAndMountContainer(container, 'dk__toast-container', document.body)
+    formatAndMountContainer(mobileContainer, 'dk__toast-mobile-container', document.body)
 
-    mobileContainer.className = 'dk__toast-mobile-container'
-    mobileContainer.setAttribute('role', 'status')
-    mobileContainer.setAttribute('aria-live', 'polite')
-    mobileContainer.setAttribute('aria-atomic', 'false')
-
-    // Append
-    document.body.appendChild(container)
-    document.body.appendChild(mobileContainer)
-
-    function DKToast(text: string, localOptions?: LocalOptions): void {
+    function renderToast(text: string, localOptions?: LocalOptions): void {
         if (!localOptions) localOptions = {}
-        const toast = document.createElement('div')
-        const left = localOptions.slotLeft
-        const right = localOptions.slot || localOptions.slotRight
-        let clicked: boolean
-
         if (!validateLocalOptions(text, localOptions)) return
 
         const positions = {
@@ -39,63 +77,40 @@ function renderToast(app: App, options: Options): void {
             x: localOptions.positionX || options.positionX
         }
 
-        // Render toast section
         const section =
             document.querySelector(`.dk__toast-${positions.y}-${positions.x}`) ||
             document.createElement('div')
         const toastCount = document.querySelectorAll('.dk__toast').length / 2
 
+        // Remove oldest toast if max limit is reached
         if (options.max && toastCount >= options.max) {
             toastQueue[0][0].parentElement?.removeChild(toastQueue[0][0])
             toastQueue[0][1].parentElement?.removeChild(toastQueue[0][1])
             toastQueue.shift()
         }
 
+        // If section doesn't exist, format and mount
         if (!section.className) {
-            // Set section attributes
-            section.className = `dk__toast-section dk__toast-${positions.y}-${positions.x}`
-            section.setAttribute('role', 'status')
-            section.setAttribute('aria-live', 'polite')
-            section.setAttribute('aria-atomic', 'false')
+            const className = `dk__toast-section dk__toast-${positions.y}-${positions.x}`
 
-            // Append
-            container.appendChild(section)
+            formatAndMountContainer(section, className, container)
         }
 
-        toast.className = 'dk__toast'
-        if (options.class) toast.classList.add(options.class)
-        if (localOptions.class) toast.classList.add(localOptions.class)
-        if (localOptions.type) toast.classList.add(`dk__${localOptions.type}`)
-
-        // If text
-        if (text) toast.textContent = text
-        // If left slot
-        if (left) {
-            toast.innerHTML = `<div class="dk__icon-left">${left}</div>` + toast.innerHTML
-        }
-        // If right slot
-        if (right) {
-            toast.innerHTML += `<div class="dk__icon-right">${right}</div>`
-        }
-        // If slot only
-        if (!text && (left || right)) toast.classList.add('dk__icon-only')
-
+        // Determine if duration is a number or false, local or global
         const duration =
             localOptions.duration || localOptions.duration === false
                 ? localOptions.duration
                 : options.duration
-        const styles = localOptions.styles ? localOptions.styles : options.styles
 
-        toast.setAttribute('style', formatCssProperties(styles, duration))
-
-        if (localOptions.disableClick) {
-            toast.style.cursor = 'default'
-            toast.style.opacity = '1'
-        }
-
+        const toast = formatToastFromOptions(text, options, localOptions, duration)
         const mobileClone = toast.cloneNode(true)
 
-        function removeToastPair(): void {
+        // Prevent attempting to remove toast if it's been removed by click
+        let clicked: boolean
+
+        function removeToastPair(e?: Event): void {
+            if (e) clicked = true
+
             if ([...section.children].includes(toast)) {
                 section.removeChild(toast)
             }
@@ -104,16 +119,10 @@ function renderToast(app: App, options: Options): void {
             }
         }
 
-        function clickHandler(): void {
-            clicked = true
-
-            removeToastPair()
-        }
-
-        // Remove toast on click
         if (!options.disableClick && !localOptions.disableClick) {
-            toast.addEventListener('click', clickHandler)
-            mobileClone.addEventListener('click', clickHandler)
+            // Remove toast on click
+            toast.addEventListener('click', removeToastPair)
+            mobileClone.addEventListener('click', removeToastPair)
         }
 
         toastQueue.push([toast, mobileClone as Element])
@@ -129,8 +138,8 @@ function renderToast(app: App, options: Options): void {
         }, duration)
     }
 
-    app.config.globalProperties.$toast = DKToast
-    app.provide('$toast', DKToast)
+    app.config.globalProperties.$toast = renderToast
+    app.provide('$toast', renderToast)
 }
 
-export default renderToast
+export default toastPlugin
