@@ -9,16 +9,32 @@ declare module '@vue/runtime-core' {
          *
          * ---
          * **Options:**
+         * @property `class` - Local class to be added to individual toast.
+         * @property `disableClick` - Disable toast removal on click.
          * @property `duration` - Time in milliseconds before hiding the toast notification, set to `false` for an indefinite duration.
-         * @property `styles` - CSS key/value pairs.
+         * @property `positionX` - 'left', 'right' or 'center'.
+         * @property `positionY` - 'top' or 'bottom'.
          * @property `slot` - (deprecated) Slot for displaying HTML on the right side of provided text.
          * @property `slotLeft` - Slot for displaying HTML on the left-side of provided text.
          * @property `slotRight` - Slot for displaying HTML on the right-side of provided text.
-         * @property `class` - Local class to be added to individual toast.
+         * @property `styles` - CSS key/value pairs.
          * @property `type` - Default classes for `success`, `error` and `passive`.
          */
         $toast: Toast
     }
+}
+
+interface LocalOptions {
+    class?: string
+    disableClick?: boolean
+    duration?: number | false
+    positionX?: 'left' | 'right' | 'center'
+    positionY?: 'top' | 'bottom'
+    slot?: string
+    slotLeft?: string
+    slotRight?: string
+    styles?: Record<string, string>
+    type?: 'error' | 'success' | 'passive'
 }
 
 /**
@@ -26,27 +42,16 @@ declare module '@vue/runtime-core' {
  *
  * ---
  * **Options:**
+ * @property `class` - Global class to be added to each toast.
+ * @property `disableClick` - Disable toast removal on click.
  * @property `duration` - Time in milliseconds before hiding the toast notification, set to `false` for an indefinite duration.
+ * @property `max` - Max number of toasts allowed at any one time.
  * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
  * @property `styles` - CSS key/value pairs.
- * @property `class` - Global class to be added to each toast.
- * @property `max` - Max number of toasts allowed at any one time.
  */
 declare const DKToast: Plugin
 export default DKToast
-
-interface LocalOptions {
-    slot?: string
-    slotLeft?: string
-    slotRight?: string
-    duration?: number | false
-    positionX?: 'left' | 'right' | 'center'
-    positionY?: 'top' | 'bottom'
-    styles?: Record<string, string>
-    class?: string
-    type?: 'error' | 'success' | 'passive'
-}
 
 /**
  * Used for typing main plugin function.

@@ -74,14 +74,9 @@ export function formatCssProperties(
 
 // Append minified stylesheet to document head
 export function appendStylesheet(options: Options): void {
-    const { duration, styles, positionX, positionY } = options
+    const { duration, styles, positionY } = options
     // Format style properties/values
     const properties = formatCssProperties(styles, duration)
-    let oppositePositionX: string
-
-    if (positionX === 'left') {
-        oppositePositionX = 'right'
-    } else oppositePositionX = 'left'
 
     // Create stylesheet
     const stylesheet = document.createElement('style')
@@ -118,7 +113,7 @@ export function appendStylesheet(options: Options): void {
             z-index: 100;
         }
         .dk__toast {
-            cursor: pointer;
+            ${options.disableClick ? '' : 'cursor: pointer;'}
             pointer-events: all;
             display: -webkit-box;
             display: -ms-flexbox;
@@ -166,9 +161,7 @@ export function appendStylesheet(options: Options): void {
             grid-area: bottom-right;
             justify-content: flex-end;
         }
-        .dk__toast:hover {
-            opacity: 0.7;
-        }
+        ${options.disableClick ? '' : '.dk__toast:hover { opacity: 0.7; }'}
         .dk__icon-left,
         .dk__icon-right {
             display: flex;

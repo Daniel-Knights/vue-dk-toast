@@ -46,8 +46,8 @@ function renderToast(app: App, options: Options): void {
         const toastCount = document.querySelectorAll('.dk__toast').length / 2
 
         if (options.max && toastCount >= options.max) {
-            toastQueue[0][0].remove()
-            toastQueue[0][1].remove()
+            toastQueue[0][0].parentElement?.removeChild(toastQueue[0][0])
+            toastQueue[0][1].parentElement?.removeChild(toastQueue[0][1])
             toastQueue.shift()
         }
 
@@ -80,7 +80,6 @@ function renderToast(app: App, options: Options): void {
         // If slot only
         if (!text && (left || right)) toast.classList.add('dk__icon-only')
 
-        // Set custom local styles
         const duration =
             localOptions.duration || localOptions.duration === false
                 ? localOptions.duration
@@ -88,6 +87,11 @@ function renderToast(app: App, options: Options): void {
         const styles = localOptions.styles ? localOptions.styles : options.styles
 
         toast.setAttribute('style', formatCssProperties(styles, duration))
+
+        if (localOptions.disableClick) {
+            toast.style.cursor = 'default'
+            toast.style.opacity = '1'
+        }
 
         const mobileClone = toast.cloneNode(true)
 
@@ -107,8 +111,10 @@ function renderToast(app: App, options: Options): void {
         }
 
         // Remove toast on click
-        toast.addEventListener('click', clickHandler)
-        mobileClone.addEventListener('click', clickHandler)
+        if (!options.disableClick && !localOptions.disableClick) {
+            toast.addEventListener('click', clickHandler)
+            mobileClone.addEventListener('click', clickHandler)
+        }
 
         toastQueue.push([toast, mobileClone as Element])
         section.appendChild(toast)

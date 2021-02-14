@@ -24,7 +24,8 @@ export default defineComponent({
             setTimeout(() => {
                 this.$toast('text with options', {
                     positionY: 'bottom',
-                    positionX: 'right'
+                    positionX: 'right',
+                    disableClick: true
                 })
             }, 2000)
             setTimeout(() => {

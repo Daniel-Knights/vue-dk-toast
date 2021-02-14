@@ -121,14 +121,15 @@ export default {
 
 ## Options
 
-| Option      | Type     | Default  | Description                                                              |
-| ----------- | -------- | -------- | ------------------------------------------------------------------------ |
-| `duration`  | `Number` | `5000`   | Milliseconds before hiding toast.                                        |
-| `positionY` | `String` | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
-| `positionX` | `String` | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
-| `styles`    | `Object` | None     | CSS key/value pairs - supports vendor prefixes.                          |
-| `class`     | `String` | None     | CSS class to be added to every toast (alongside `.dk__toast`).           |
-| `max`       | `Number` | None     | Max number of toasts allowed per-section at any one time.                |
+| Option         | Type      | Default  | Description                                                              |
+| -------------- | --------- | -------- | ------------------------------------------------------------------------ |
+| `class`        | `String`  | None     | CSS class to be added to every toast (alongside `.dk__toast`).           |
+| `disableClick` | `Boolean` | `false`  | Disable toast removal on click.                                          |
+| `duration`     | `Number`  | `5000`   | Milliseconds before hiding toast.                                        |
+| `max`          | `Number`  | None     | Max number of toasts allowed per-section at any one time.                |
+| `positionX`    | `String`  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
+| `positionY`    | `String`  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
+| `styles`       | `Object`  | None     | CSS key/value pairs - supports vendor prefixes.                          |
 
 **EXAMPLE:**
 
@@ -138,12 +139,13 @@ createApp(App)
         duration: 5000,
         positionY: 'bottom', // 'top' or 'bottom'
         positionX: 'right', // 'left', 'right' or 'center'
+        disableClick: true,
         styles: {
             color: '#000',
             backgroundColor: '#fff'
             // Vendor prefixes also supported
         },
-        class: 'custom-class' // Added to each toast,
+        class: 'custom-class', // Added to each toast,
         max: 10
     })
     .mount('#app')
@@ -151,20 +153,24 @@ createApp(App)
 
 ## Local Options
 
-| Option      | Type     | Default | Description                                                                                              |
-| ----------- | -------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `duration`  | `Number` | `5000`  | Milliseconds before hiding toast. Overrides global duration.                                             |
-| `styles`    | `Object` | None    | CSS key/value pairs. Supports vendor prefixes.                                                           |
-| `slotLeft`  | `String` | None    | Any valid HTML as a string.                                                                              |
-| `slotRight` | `String` | None    | Any valid HTML as a string.                                                                              |
-| `class`     | `String` | None    | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class). |
-| `type`      | `String` | None    | Default helper class - `success`, `error` or `passive`.                                                  |
+| Option         | Type      | Default  | Description                                                                                              |
+| -------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| `class`        | `String`  | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class). |
+| `disableClick` | `Boolean` | `false`  | Disable toast removal on click.                                                                          |
+| `duration`     | `Number`  | `5000`   | Milliseconds before hiding toast. Overrides global `duration`.                                           |
+| `positionX`    | `String`  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. Overrides global `positionX`.   |
+| `positionY`    | `String`  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`. Overrides global `positionY`.              |
+| `slotLeft`     | `String`  | None     | Any valid HTML as a string. Displays left of text.                                                       |
+| `slotRight`    | `String`  | None     | Any valid HTML as a string. Displays right of text.                                                      |
+| `styles`       | `Object`  | None     | CSS key/value pairs. Supports vendor prefixes.                                                           |
+| `type`         | `String`  | None     | Default helper class - `success`, `error` or `passive`.                                                  |
 
 **EXAMPLE:**
 
 ```js
 this.$toast('Simple!', {
     duration: 1000,
+    disableClick: true,
     styles: {
         borderRadius: '25px'
     },

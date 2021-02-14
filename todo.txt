@@ -1,1 +1,4 @@
 disable click option
+check local options has priority over global options
+unit-tests
+code cleanup
