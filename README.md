@@ -121,13 +121,16 @@ export default {
 
 ## Options
 
-| Option      | Type     | Description                                                              |
-| ----------- | -------- | ------------------------------------------------------------------------ |
-| `duration`  | `Number` | Milliseconds before hiding toast.                                        |
-| `positionY` | `String` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
-| `positionX` | `String` | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
-| `styles`    | `Object` | CSS key/value pairs - supports vendor prefixes.                          |
-| `class`     | `String` | CSS class to be added to every toast.                                    |
+| Option      | Type     | Default  | Description                                                              |
+| ----------- | -------- | -------- | ------------------------------------------------------------------------ |
+| `duration`  | `Number` | `5000`   | Milliseconds before hiding toast.                                        |
+| `positionY` | `String` | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
+| `positionX` | `String` | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
+| `styles`    | `Object` | None     | CSS key/value pairs - supports vendor prefixes.                          |
+| `class`     | `String` | None     | CSS class to be added to every toast (alongside `.dk__toast`).           |
+| `max`       | `Number` | None     | Max number of toasts allowed per-section at any one time.                |
+
+**EXAMPLE:**
 
 ```js
 createApp(App)
@@ -140,21 +143,24 @@ createApp(App)
             backgroundColor: '#fff'
             // Vendor prefixes also supported
         },
-        class: 'custom-class' // Added to each toast
+        class: 'custom-class' // Added to each toast,
+        max: 10
     })
     .mount('#app')
 ```
 
 ## Local Options
 
-| Option      | Type     | Description                                                  |
-| ----------- | -------- | ------------------------------------------------------------ |
-| `duration`  | `Number` | Milliseconds before hiding toast. Overrides global duration. |
-| `styles`    | `Object` | CSS key/value pairs. Supports vendor prefixes.               |
-| `slotLeft`  | `String` | Any valid HTML as a string.                                  |
-| `slotRight` | `String` | Any valid HTML as a string.                                  |
-| `class`     | `String` | CSS class to be added to this toast only.                    |
-| `type`      | `String` | Default helper class - `success`, `error` or `passive`.      |
+| Option      | Type     | Default | Description                                                                                              |
+| ----------- | -------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `duration`  | `Number` | `5000`  | Milliseconds before hiding toast. Overrides global duration.                                             |
+| `styles`    | `Object` | None    | CSS key/value pairs. Supports vendor prefixes.                                                           |
+| `slotLeft`  | `String` | None    | Any valid HTML as a string.                                                                              |
+| `slotRight` | `String` | None    | Any valid HTML as a string.                                                                              |
+| `class`     | `String` | None    | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class). |
+| `type`      | `String` | None    | Default helper class - `success`, `error` or `passive`.                                                  |
+
+**EXAMPLE:**
 
 ```js
 this.$toast('Simple!', {

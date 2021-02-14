@@ -20,10 +20,9 @@ const toastPlugin = {
     install: (app: App, options: Options): void => {
         // Set defaults
         if (!options) options = {}
-        if (!options.duration) options.duration = 5000
+        if (!options.duration && options.duration !== false) options.duration = 5000
         if (!options.positionY) options.positionY = 'bottom'
         if (!options.positionX) options.positionX = 'right'
-        if (!options.max) options.max = 5
 
         validateOptions(options)
         appendStylesheet(options)

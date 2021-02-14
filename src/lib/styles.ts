@@ -36,7 +36,7 @@ function minify(styles: string): string {
 // Format CSS from camelCase
 export function formatCssProperties(
     styles?: Record<string, string>,
-    duration?: number
+    duration?: number | false
 ): string {
     if (!styles) styles = {}
 
@@ -62,23 +62,24 @@ export function formatCssProperties(
         })
         .join('')
 
-    // Calculate -0.15s from the end of duration for animating out
-    let animationDelay
-
     if (duration) {
-        animationDelay = `animation-delay: 0s, ${duration / 1000 - 0.15}s;`
+        // Calculate -0.15s from the end of duration for animating out
+        formatted += `animation-delay: 0s, ${duration / 1000 - 0.15}s;`
+    } else {
+        formatted += 'animation: dk__toast-in 0.15s;'
     }
 
-    return (formatted += animationDelay)
+    return formatted
 }
 
 // Append minified stylesheet to document head
 export function appendStylesheet(options: Options): void {
+    const { duration, styles, positionX, positionY } = options
     // Format style properties/values
-    const properties = formatCssProperties(options.styles, options.duration)
+    const properties = formatCssProperties(styles, duration)
     let oppositePositionX: string
 
-    if (options.positionX === 'left') {
+    if (positionX === 'left') {
         oppositePositionX = 'right'
     } else oppositePositionX = 'left'
 
@@ -127,6 +128,7 @@ export function appendStylesheet(options: Options): void {
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
+            position: relative;
             margin: 5px 0;
             padding: 7px 40px;
             min-width: 170px;
@@ -254,7 +256,7 @@ export function appendStylesheet(options: Options): void {
             .dk__toast-section {
                 right: 0;
                 left: 0;
-                ${options.positionY}: 10px;
+                ${positionY}: 10px;
                 margin: 0 auto;
                 width: 90%;
                 transform: none;

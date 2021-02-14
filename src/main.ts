@@ -5,11 +5,11 @@ import DKToast from './lib/toast'
 const app = createApp(App)
 
 app.use(DKToast, {
-    duration: 5000,
+    duration: false,
     positionY: 'bottom',
     positionX: 'center',
-    class: 'toast'
-    // styles: { border: '10px solid' },
+    class: 'toast',
+    max: 10
 })
 
 app.mount('#app')

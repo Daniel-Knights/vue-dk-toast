@@ -3,6 +3,8 @@ import type { Options, LocalOptions } from './types'
 import { formatCssProperties } from './styles'
 import { validateLocalOptions } from './validate'
 
+const toastQueue: Array<[Element, Element]> = []
+
 function renderToast(app: App, options: Options): void {
     // Render toast container
     const container = document.createElement('div')
@@ -28,8 +30,6 @@ function renderToast(app: App, options: Options): void {
         const toast = document.createElement('div')
         const left = localOptions.slotLeft
         const right = localOptions.slot || localOptions.slotRight
-        let duration
-        let styles
         let clicked: boolean
 
         if (!validateLocalOptions(text, localOptions)) return
@@ -43,10 +43,12 @@ function renderToast(app: App, options: Options): void {
         const section =
             document.querySelector(`.dk__toast-${positions.y}-${positions.x}`) ||
             document.createElement('div')
+        const toastCount = document.querySelectorAll('.dk__toast').length / 2
 
-        if (section.children.length >= (options.max as number)) {
-            section.removeChild(section.firstChild as Element)
-            mobileContainer.removeChild(mobileContainer.firstChild as Element)
+        if (options.max && toastCount >= options.max) {
+            toastQueue[0][0].remove()
+            toastQueue[0][1].remove()
+            toastQueue.shift()
         }
 
         if (!section.className) {
@@ -79,15 +81,17 @@ function renderToast(app: App, options: Options): void {
         if (!text && (left || right)) toast.classList.add('dk__icon-only')
 
         // Set custom local styles
-        duration = localOptions.duration ? localOptions.duration : options.duration
-        styles = localOptions.styles ? localOptions.styles : options.styles
+        const duration =
+            localOptions.duration || localOptions.duration === false
+                ? localOptions.duration
+                : options.duration
+        const styles = localOptions.styles ? localOptions.styles : options.styles
+
         toast.setAttribute('style', formatCssProperties(styles, duration))
 
         const mobileClone = toast.cloneNode(true)
 
-        function clickHandler(): void {
-            clicked = true
-
+        function removeToastPair(): void {
             if ([...section.children].includes(toast)) {
                 section.removeChild(toast)
             }
@@ -96,22 +100,26 @@ function renderToast(app: App, options: Options): void {
             }
         }
 
+        function clickHandler(): void {
+            clicked = true
+
+            removeToastPair()
+        }
+
         // Remove toast on click
         toast.addEventListener('click', clickHandler)
         mobileClone.addEventListener('click', clickHandler)
 
+        toastQueue.push([toast, mobileClone as Element])
         section.appendChild(toast)
         mobileContainer.appendChild(mobileClone)
+
+        if (!duration) return
 
         setTimeout(() => {
             if (clicked) return
 
-            if ([...section.children].includes(toast)) {
-                section.removeChild(toast)
-            }
-            if ([...mobileContainer.children].includes(mobileClone as Element)) {
-                mobileContainer.removeChild(mobileClone)
-            }
+            removeToastPair()
         }, duration)
     }
 

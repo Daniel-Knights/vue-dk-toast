@@ -47,7 +47,8 @@ export default defineComponent({
                 this.$toast('text + left icon ', {
                     slotLeft: '<i class="fa fa-thumbs-up"></i>',
                     positionY: 'top',
-                    positionX: 'center'
+                    positionX: 'center',
+                    duration: false
                 })
             }, 5000)
             setTimeout(() => {
@@ -102,7 +103,8 @@ export default defineComponent({
                 this.$toast('PASSIVE: SOMETHING HAPPENED', {
                     slotLeft: '<i class="fa fa-exclamation"></i>',
                     slotRight: '<i class="fa fa-exclamation"></i>',
-                    type: 'passive'
+                    type: 'passive',
+                    class: 'test'
                 })
             }, 14000)
         }
