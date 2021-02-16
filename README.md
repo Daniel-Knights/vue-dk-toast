@@ -13,7 +13,8 @@
 
 ---
 
-[**Demo**](https://vue-dk-toast.netlify.app/)
+[**Demo**](https://vue-dk-toast.netlify.app/) \
+[**CodePen Demo**](https://codepen.io/daniel-knights/pen/NWbjRZZ)
 
 -   [Install](#install)
 -   [Import](#import)
@@ -73,7 +74,7 @@ CDN
 It's recommended you use a specific version number to guard against breaking changes and load the script faster:
 
 ```html
-<script src="https://unpkg.com/vue-dk-toast@2.0.4"></script>
+<script src="https://unpkg.com/vue-dk-toast@2.0.5"></script>
 ```
 
 ## Import
