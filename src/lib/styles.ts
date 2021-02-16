@@ -100,7 +100,9 @@ export function appendStylesheet(options: Options): void {
             width: calc(100vw - 40px);
         }
         .dk__toast-mobile-container {
+            pointer-events: none;
             visibility: hidden;
+            position: fixed;
         }
         .dk__toast-section {
             display: -webkit-box;
@@ -232,12 +234,10 @@ export function appendStylesheet(options: Options): void {
                 visibility: hidden;
             }
             .dk__toast-mobile-container {
-                pointer-events: none;
                 visibility: visible;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
-                position: fixed;
                 top: 0;
                 left: 0;
                 padding: 20px;
