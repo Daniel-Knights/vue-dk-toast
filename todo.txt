@@ -1,1 +1,2 @@
 unit-tests
+transition-out toasts on max limit

@@ -5,7 +5,15 @@
 [![npm](https://img.shields.io/npm/v/vue-dk-toast.svg)](https://www.npmjs.com/package/vue-dk-toast)
 [![vue](https://img.shields.io/badge/vue-3.x-brightgreen)](https://v3.vuejs.org/)
 
-[Demo](https://vue-dk-toast.netlify.app/)
+-   _Lightweight_
+-   _Customizable_
+-   _Easy to use_
+-   _Mobile-friendly_
+-   _Built-in TypeScript support_
+
+---
+
+[**Demo**](https://vue-dk-toast.netlify.app/)
 
 -   [Install](#install)
 -   [Import](#import)
@@ -65,7 +73,7 @@ CDN
 It's recommended you use a specific version number to guard against breaking changes and load the script faster:
 
 ```html
-<script src="https://unpkg.com/vue-dk-toast@1.5.4"></script>
+<script src="https://unpkg.com/vue-dk-toast@2.0.4"></script>
 ```
 
 ## Import
@@ -121,15 +129,15 @@ export default {
 
 ## Options
 
-| Option         | Type      | Default  | Description                                                              |
-| -------------- | --------- | -------- | ------------------------------------------------------------------------ |
-| `class`        | `String`  | None     | CSS class to be added to every toast (alongside `.dk__toast`).           |
-| `disableClick` | `Boolean` | `false`  | Disable toast removal on click.                                          |
-| `duration`     | `Number`  | `5000`   | Milliseconds before hiding toast.                                        |
-| `max`          | `Number`  | None     | Max number of toasts allowed per-section at any one time.                |
-| `positionX`    | `String`  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. |
-| `positionY`    | `String`  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.            |
-| `styles`       | `Object`  | None     | CSS key/value pairs - supports vendor prefixes.                          |
+| Option         | Type      | Default  | Description                                                                                    |
+| -------------- | --------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `class`        | `String`  | None     | Custom CSS class to be added to every toast (alongside `.dk__toast`).                          |
+| `disableClick` | `Boolean` | `false`  | Disable toast removal on click.                                                                |
+| `duration`     | `Number`  | `5000`   | Milliseconds before hiding toast.                                                              |
+| `max`          | `Number`  | None     | Max number of toasts allowed on the page at any one time. Removes oldest existing toast first. |
+| `positionX`    | `String`  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`.                       |
+| `positionY`    | `String`  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.                                  |
+| `styles`       | `Object`  | None     | CSS key/value pairs - supports vendor prefixes.                                                |
 
 **EXAMPLE:**
 
@@ -156,7 +164,7 @@ createApp(App)
 | Option         | Type      | Default  | Description                                                                                              |
 | -------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------- |
 | `class`        | `String`  | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class). |
-| `disableClick` | `Boolean` | `false`  | Disable toast removal on click.                                                                          |
+| `disableClick` | `Boolean` | `false`  | Disable individual toast removal on click.                                                               |
 | `duration`     | `Number`  | `5000`   | Milliseconds before hiding toast. Overrides global `duration`.                                           |
 | `positionX`    | `String`  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. Overrides global `positionX`.   |
 | `positionY`    | `String`  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`. Overrides global `positionY`.              |
@@ -170,7 +178,6 @@ createApp(App)
 ```js
 this.$toast('Simple!', {
     duration: 1000,
-    disableClick: true,
     styles: {
         borderRadius: '25px'
     },
@@ -178,7 +185,10 @@ this.$toast('Simple!', {
     slotLeft: '<i class="fa fa-user"></i>', // Add icon to left
     slotRight: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
     class: 'local-class', // Added to this toast only
-    type: 'success' // Default classes: 'success', 'error' and 'passive'
+    type: 'success', // Default classes: 'success', 'error' and 'passive'
+    positionX: 'center',
+    positionY: 'top',
+    disableClick: true
 })
 ```
 
