@@ -117,6 +117,8 @@ function toastPlugin(app: App, options: Options): void {
             if ([...mobileContainer.children].includes(mobileClone as Element)) {
                 mobileContainer.removeChild(mobileClone)
             }
+
+            toastQueue.shift()
         }
 
         if (!options.disableClick && !localOptions.disableClick) {
