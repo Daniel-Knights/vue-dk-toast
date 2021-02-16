@@ -6,10 +6,11 @@ const app = createApp(App)
 
 app.use(DKToast, {
     duration: false,
-    positionY: 'bottom',
     positionX: 'center',
+    positionY: 'bottom',
     class: 'toast',
-    max: 10
+    max: 10,
+    styles: { color: 'red' }
 })
 
 app.mount('#app')

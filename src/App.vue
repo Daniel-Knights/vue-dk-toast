@@ -41,7 +41,8 @@ export default defineComponent({
                 this.$toast('text + right icon (deprecated)', {
                     slot: '<i class="fa fa-thumbs-up"></i>',
                     positionY: 'top',
-                    positionX: 'right'
+                    positionX: 'right',
+                    styles: { color: 'blue' }
                 })
             }, 4000)
             setTimeout(() => {
