@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
          * @property `class` - Local class to be added to individual toast.
          * @property `disableClick` - Disable toast removal on click.
          * @property `duration` - Time in milliseconds before hiding the toast notification, set to `false` for an indefinite duration.
+         * @property `link` - Object with `href` and `targetBlank` properties, turns the toast into an `<a>` element which has a `href` of the one provided and optional `target="_blank"`.
          * @property `positionX` - 'left', 'right' or 'center'.
          * @property `positionY` - 'top' or 'bottom'.
          * @property `slot` - (deprecated) Slot for displaying HTML on the right side of provided text.
@@ -28,6 +29,7 @@ interface LocalOptions {
     class?: string
     disableClick?: boolean
     duration?: number | false
+    link?: { href: string; targetBlank?: boolean }
     positionX?: 'left' | 'right' | 'center'
     positionY?: 'top' | 'bottom'
     slot?: string

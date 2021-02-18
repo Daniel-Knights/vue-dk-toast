@@ -26,9 +26,22 @@ function formatToastFromOptions(
     localOptions: LocalOptions,
     duration?: number | false
 ): Element {
-    const toast = document.createElement('div')
+    const toast = localOptions.link?.href
+        ? document.createElement('a')
+        : document.createElement('div')
     const left = localOptions.slotLeft
     const right = localOptions.slot || localOptions.slotRight
+
+    if (localOptions.link?.href) {
+        const anchor = toast as HTMLAnchorElement
+
+        anchor.href = localOptions.link.href
+        anchor.rel = 'noopener'
+
+        if (localOptions.link.targetBlank) {
+            anchor.target = '_blank'
+        }
+    }
 
     // Add classes
     toast.className = 'dk__toast'
@@ -84,8 +97,11 @@ function toastPlugin(app: App, options: Options): void {
 
         // Remove oldest toast if max limit is reached
         if (options.max && toastCount >= options.max) {
-            toastQueue[0][0].parentElement?.removeChild(toastQueue[0][0])
-            toastQueue[0][1].parentElement?.removeChild(toastQueue[0][1])
+            const toastEl = toastQueue[0][0]
+            const mobileToastEl = toastQueue[0][1]
+
+            toastEl.parentElement?.removeChild(toastEl)
+            mobileToastEl.parentElement?.removeChild(mobileToastEl)
             toastQueue.shift()
         }
 

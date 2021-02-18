@@ -21,6 +21,7 @@ export interface Options {
  * @property `class?: string`
  * @property `disableClick?: boolean`
  * @property `duration?: number | false`
+ * @property `link?: { href: string; targetBlank?: boolean }`
  * @property `positionX?: 'left' | 'right' | 'center'`
  * @property `positionY?: 'top' | 'bottom'`
  * @property `slot?: string`
@@ -33,6 +34,7 @@ export interface LocalOptions {
     class?: string
     disableClick?: boolean
     duration?: number | false
+    link?: { href: string; targetBlank?: boolean }
     positionX?: 'left' | 'right' | 'center'
     positionY?: 'top' | 'bottom'
     slot?: string
