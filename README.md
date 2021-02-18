@@ -162,18 +162,18 @@ createApp(App)
 
 ## Local Options
 
-| Option         | Type                                      | Default  | Description                                                                                                 |
-| -------------- | ----------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
-| `class`        | `String`                                  | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class).    |
-| `disableClick` | `Boolean`                                 | `false`  | Disable individual toast removal on click.                                                                  |
-| `duration`     | `Number`                                  | `5000`   | Milliseconds before hiding toast. Overrides global `duration`.                                              |
-| `link`         | `{ href: string, targetBlank?: boolean }` | none     | Turns the toast into an `<a>` element which has a `href` of the one provided and optional `target="_blank"` |
-| `positionX`    | `String`                                  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. Overrides global `positionX`.      |
-| `positionY`    | `String`                                  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`. Overrides global `positionY`.                 |
-| `slotLeft`     | `String`                                  | None     | Any valid HTML as a string. Displays left of text.                                                          |
-| `slotRight`    | `String`                                  | None     | Any valid HTML as a string. Displays right of text.                                                         |
-| `styles`       | `Object`                                  | None     | CSS key/value pairs. Supports vendor prefixes.                                                              |
-| `type`         | `String`                                  | None     | Default helper class - `success`, `error` or `passive`.                                                     |
+| Option         | Type                                      | Default  | Description                                                                                                  |
+| -------------- | ----------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `class`        | `String`                                  | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class).     |
+| `disableClick` | `Boolean`                                 | `false`  | Disable individual toast removal on click.                                                                   |
+| `duration`     | `Number`                                  | `5000`   | Milliseconds before hiding toast. Overrides global `duration`.                                               |
+| `link`         | `{ href: string, targetBlank?: boolean }` | none     | Turns the toast into an `<a>` element which has a `href` of the one provided and optional `target="_blank"`. |
+| `positionX`    | `String`                                  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. Overrides global `positionX`.       |
+| `positionY`    | `String`                                  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`. Overrides global `positionY`.                  |
+| `slotLeft`     | `String`                                  | None     | Any valid HTML as a string. Displays left of text.                                                           |
+| `slotRight`    | `String`                                  | None     | Any valid HTML as a string. Displays right of text.                                                          |
+| `styles`       | `Object`                                  | None     | CSS key/value pairs. Supports vendor prefixes.                                                               |
+| `type`         | `String`                                  | None     | Default helper class - `success`, `error` or `passive`.                                                      |
 
 **EXAMPLE:**
 
