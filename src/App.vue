@@ -18,7 +18,8 @@ export default defineComponent({
         toast(): void {
             // Error
             this.$toast('f', {
-                link: { href: 'https://www.stackoverflow.com' }
+                link: { href: 'kjnkjn', targetBlank: true },
+                disableClick: true
             })
             // setTimeout(() => {
             //     this.$toast('text only')

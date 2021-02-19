@@ -5,17 +5,7 @@ import { validateLocalOptions } from './validate'
 
 const toastQueue: Array<[Element, Element]> = []
 
-function formatAndMountContainer(el: Element, className: string, target: Element): void {
-    const attributes = [
-        ['role', 'status'],
-        ['aria-live', 'polite'],
-        ['aria-atomic', 'false']
-    ]
-
-    attributes.forEach((attr) => {
-        el.setAttribute(attr[0], attr[1])
-    })
-
+function setClassAndMount(el: Element, className: string, target: Element): void {
     el.className = className
     target.appendChild(el)
 }
@@ -49,6 +39,11 @@ function formatToastFromOptions(
     if (localOptions.class) toast.classList.add(localOptions.class)
     if (localOptions.type) toast.classList.add(`dk__${localOptions.type}`)
 
+    // A11y attributes
+    toast.setAttribute('role', 'status')
+    toast.setAttribute('aria-live', 'polite')
+    toast.setAttribute('aria-atomic', 'false')
+
     // If text
     if (text) toast.textContent = text
     // If left slot
@@ -65,11 +60,8 @@ function formatToastFromOptions(
     const styles = localOptions.styles ? localOptions.styles : options.styles
     toast.setAttribute('style', formatCssProperties(styles, duration))
 
-    if (localOptions.disableClick) {
-        // Prevent hover styling
-        toast.style.cursor = 'default'
-        toast.style.opacity = '1'
-    }
+    // Prevent hover styling
+    if (localOptions.disableClick) toast.classList.add('dk__click-disabled')
 
     return toast
 }
@@ -78,8 +70,8 @@ function toastPlugin(app: App, options: Options): void {
     const container = document.createElement('div')
     const mobileContainer = document.createElement('div')
 
-    formatAndMountContainer(container, 'dk__toast-container', document.body)
-    formatAndMountContainer(mobileContainer, 'dk__toast-mobile-container', document.body)
+    setClassAndMount(container, 'dk__toast-container', document.body)
+    setClassAndMount(mobileContainer, 'dk__toast-mobile-container', document.body)
 
     function renderToast(text: string, localOptions?: LocalOptions): void {
         if (!localOptions) localOptions = {}
@@ -109,7 +101,7 @@ function toastPlugin(app: App, options: Options): void {
         if (!section.className) {
             const className = `dk__toast-section dk__toast-${positions.y}-${positions.x}`
 
-            formatAndMountContainer(section, className, container)
+            setClassAndMount(section, className, container)
         }
 
         // Determine if duration is a number or false, local or global

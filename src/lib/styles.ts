@@ -193,6 +193,10 @@ export function appendStylesheet(options: Options): void {
             left: unset;
             padding: 4px;
         }
+        .dk__toast.dk__click-disabled {
+            cursor: default;
+            opacity: 1;
+        }
         .dk__toast.dk__error {
             background-color: rgb(255, 0, 0);
             color: #fff;

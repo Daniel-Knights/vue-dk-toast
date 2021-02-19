@@ -5,11 +5,12 @@
 [![npm](https://img.shields.io/npm/v/vue-dk-toast.svg)](https://www.npmjs.com/package/vue-dk-toast)
 [![vue](https://img.shields.io/badge/vue-3.x-brightgreen)](https://v3.vuejs.org/)
 
--   _Lightweight_
--   _Customizable_
--   _Easy to use_
--   _Mobile-friendly_
--   _Built-in TypeScript support_
+-   _Lightweight_ ☁️
+-   _Customizable_ 🧰
+-   _Easy to use_ 🥷
+-   _Mobile-friendly_ 📱
+-   _Built-in TypeScript support_ 🔒
+-   _A11y compliant_ 🧑‍🦯
 
 ---
 
