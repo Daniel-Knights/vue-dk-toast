@@ -239,14 +239,20 @@ export function appendStylesheet(options: Options): void {
             }
             .dk__toast-mobile-container {
                 visibility: visible;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
+                display: grid;
+                grid-template-areas: "top" "bottom";
+                grid-template-rows: 50% 50%;
+                grid-template-columns: 100%;
                 top: 0;
                 left: 0;
                 padding: 20px;
                 height: calc(100vh - 40px);
                 width: calc(100vw - 40px);
+            }
+            .dk__toast-mobile-top { grid-area: top; }
+            .dk__toast-mobile-bottom { 
+                grid-area: bottom;
+                align-self: end;
             }
         }
         @media only screen and (max-width: 450px) {

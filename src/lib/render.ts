@@ -85,6 +85,9 @@ function toastPlugin(app: App, options: Options): void {
         const section =
             document.querySelector(`.dk__toast-${positions.y}-${positions.x}`) ||
             document.createElement('div')
+        const mobileSection =
+            document.querySelector(`.dk__toast-mobile-${positions.y}`) ||
+            document.createElement('div')
         const toastCount = document.querySelectorAll('.dk__toast').length / 2
 
         // Remove oldest toast if max limit is reached
@@ -102,6 +105,11 @@ function toastPlugin(app: App, options: Options): void {
             const className = `dk__toast-section dk__toast-${positions.y}-${positions.x}`
 
             setClassAndMount(section, className, container)
+        }
+        if (!mobileSection.className) {
+            const className = `dk__toast-mobile-section dk__toast-mobile-${positions.y}`
+
+            setClassAndMount(mobileSection, className, mobileContainer)
         }
 
         // Determine if duration is a number or false, local or global
@@ -122,8 +130,8 @@ function toastPlugin(app: App, options: Options): void {
             if ([...section.children].includes(toast)) {
                 section.removeChild(toast)
             }
-            if ([...mobileContainer.children].includes(mobileClone as Element)) {
-                mobileContainer.removeChild(mobileClone)
+            if ([...mobileSection.children].includes(mobileClone as Element)) {
+                mobileSection.removeChild(mobileClone)
             }
 
             toastQueue.shift()
@@ -137,7 +145,7 @@ function toastPlugin(app: App, options: Options): void {
 
         toastQueue.push([toast, mobileClone as Element])
         section.appendChild(toast)
-        mobileContainer.appendChild(mobileClone)
+        mobileSection.appendChild(mobileClone)
 
         if (!duration) return
 

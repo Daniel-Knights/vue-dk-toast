@@ -1,2 +1,3 @@
 unit-tests
 transition-out toasts on max limit
+transition other toasts when appending/removing
