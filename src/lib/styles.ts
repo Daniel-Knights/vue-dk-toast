@@ -98,6 +98,7 @@ export function appendStylesheet(options: Options): void {
             padding: 20px;
             height: calc(100vh - 40px);
             width: calc(100vw - 40px);
+            z-index: 10000;
         }
         .dk__toast-mobile-container {
             pointer-events: none;
@@ -112,7 +113,6 @@ export function appendStylesheet(options: Options): void {
             -webkit-box-direction: normal;
             -ms-flex-direction: column;
             flex-direction: column;
-            z-index: 100;
         }
         .dk__toast {
             ${options.disableClick ? '' : 'cursor: pointer;'}
@@ -248,6 +248,7 @@ export function appendStylesheet(options: Options): void {
                 padding: 20px;
                 height: calc(100vh - 40px);
                 width: calc(100vw - 40px);
+                z-index: 10000;
             }
             .dk__toast-mobile-top { grid-area: top; }
             .dk__toast-mobile-bottom { 
