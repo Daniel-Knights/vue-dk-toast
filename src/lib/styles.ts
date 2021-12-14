@@ -1,90 +1,89 @@
-import type { Options } from './types'
+import type { Options } from './types';
 
 /** Minify CSS */
 function minify(styles: string): string {
-    let selector = false
-    let value = false
+  let selector = false;
+  let value = false;
 
-    const minified = styles
-        .split('')
-        .map((char) => {
-            // Retain spaces between selectors
-            // Determine start of selector
-            if ((char === '.' || char === '@' || char === '#') && !value) selector = true
-            // Determine end of selector
-            if (selector && (char === ',' || char === '{')) selector = false
+  const minified = styles
+    .split('')
+    .map((char) => {
+      // Retain spaces between selectors
+      // Determine start of selector
+      if ((char === '.' || char === '@' || char === '#') && !value) selector = true;
+      // Determine end of selector
+      if (selector && (char === ',' || char === '{')) selector = false;
 
-            // Retain spaces between rules with multiple values
-            if (char === ':' && !selector) value = true
-            if (char === ';' && !selector) value = false
+      // Retain spaces between rules with multiple values
+      if (char === ':' && !selector) value = true;
+      if (char === ';' && !selector) value = false;
 
-            // Replace spaces and line-breaks
-            if ((char === ' ' || char === '\n' || char === '\r') && !selector && !value)
-                return ''
+      // Replace spaces and line-breaks
+      if ((char === ' ' || char === '\n' || char === '\r') && !selector && !value)
+        return '';
 
-            return char
-        })
-        .join('')
-        .split(' {')
-        .join('{')
-        .split(': ')
-        .join(':')
+      return char;
+    })
+    .join('')
+    .split(' {')
+    .join('{')
+    .split(': ')
+    .join(':');
 
-    return minified
+  return minified;
 }
 
 /** Format CSS from camelCase */
 export function formatCssProperties(
-    styles?: Record<string, string>,
-    duration?: number | false
+  styles?: Record<string, string>,
+  duration?: number | false
 ): string {
-    if (!styles) styles = {}
+  if (!styles) styles = {};
 
-    let formatted = Object.keys(styles)
-        .map((style) => {
-            const formattedName = style
-                .split('')
-                .map((letter, index) => {
-                    // Vendor prefixes
-                    const webkit = style.split('webkit')[0] === ''
-                    const moz = style.split('moz')[0] === ''
-                    const ms = style.split('ms')[0] === ''
+  let formatted = Object.keys(styles)
+    .map((style) => {
+      const formattedName = style
+        .split('')
+        .map((letter, index) => {
+          // Vendor prefixes
+          const webkit = style.split('webkit')[0] === '';
+          const moz = style.split('moz')[0] === '';
+          const ms = style.split('ms')[0] === '';
 
-                    if (letter === '-') return letter
-                    if ((webkit || moz || ms) && index === 0)
-                        return `-${letter.toLowerCase()}`
-                    if (letter === letter.toUpperCase()) return `-${letter.toLowerCase()}`
-                    else return letter
-                })
-                .join('')
-            // @ts-ignore
-            return `${formattedName}: ${styles[style]};`
+          if (letter === '-') return letter;
+          if ((webkit || moz || ms) && index === 0) return `-${letter.toLowerCase()}`;
+          if (letter === letter.toUpperCase()) return `-${letter.toLowerCase()}`;
+          else return letter;
         })
-        .join('')
+        .join('');
+      // @ts-ignore
+      return `${formattedName}: ${styles[style]};`;
+    })
+    .join('');
 
-    if (duration) {
-        // Calculate -0.15s from the end of duration for animating out
-        formatted += `animation-delay: 0s, ${duration / 1000 - 0.15}s;`
-    } else {
-        formatted += 'animation: dk__toast-in 0.15s;'
-    }
+  if (duration) {
+    // Calculate -0.15s from the end of duration for animating out
+    formatted += `animation-delay: 0s, ${duration / 1000 - 0.15}s;`;
+  } else {
+    formatted += 'animation: dk__toast-in 0.15s;';
+  }
 
-    return formatted
+  return formatted;
 }
 
 /** Append minified stylesheet to document head */
 export function appendStylesheet(options: Options): void {
-    const { duration, styles, positionY } = options
-    // Format style properties/values
-    const properties = formatCssProperties(styles, duration)
+  const { duration, styles, positionY } = options;
+  // Format style properties/values
+  const properties = formatCssProperties(styles, duration);
 
-    // Create stylesheet
-    const stylesheet = document.createElement('style')
+  // Create stylesheet
+  const stylesheet = document.createElement('style');
 
-    stylesheet.type = 'text/css'
+  stylesheet.type = 'text/css';
 
-    // Stylesheet content
-    stylesheet.textContent = minify(`
+  // Stylesheet content
+  stylesheet.textContent = minify(`
         .dk__toast-container {
             pointer-events: none;
             display: grid;
@@ -272,8 +271,8 @@ export function appendStylesheet(options: Options): void {
                 padding: 8px 30px;
             }
         }
-    `)
+    `);
 
-    // Append
-    document.head.appendChild(stylesheet)
+  // Append
+  document.head.appendChild(stylesheet);
 }

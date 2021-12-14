@@ -1,65 +1,65 @@
 {
-    "name": "vue-dk-toast",
-    "version": "2.2.1",
-    "private": false,
-    "description": "Lightweight toast notification plugin for Vue 3",
-    "author": "Daniel Knights",
-    "license": "MIT",
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "lint": "vue-cli-service lint",
-        "lib": "vue-cli-service build --target lib --name dkToast ./src/lib/toast.ts && cp src/lib/toast.d.ts dist/toast.d.ts",
-        "pub": "npm version patch && npm publish",
-        "pub-minor": "npm version minor && npm publish",
-        "pub-major": "npm version major && npm publish"
-    },
-    "main": "dist/dkToast.umd.min.js",
-    "files": [
-        "dist/dkToast.umd.min.js",
-        "dist/toast.d.ts"
-    ],
-    "types": "dist/toast.d.ts",
-    "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.33.0",
-        "@typescript-eslint/parser": "^2.33.0",
-        "@vue/cli-plugin-babel": "~4.5.11",
-        "@vue/cli-plugin-eslint": "~4.5.11",
-        "@vue/cli-plugin-typescript": "^4.5.11",
-        "@vue/cli-service": "~4.5.11",
-        "@vue/compiler-sfc": "^3.0.5",
-        "@vue/eslint-config-typescript": "^5.0.2",
-        "babel-eslint": "^10.1.0",
-        "core-js": "^3.8.3",
-        "eslint": "^7.19.0",
-        "eslint-config-prettier": "^7.2.0",
-        "eslint-plugin-prettier": "^3.3.1",
-        "eslint-plugin-vue": "^7.5.0",
-        "prettier": "^2.2.1",
-        "typescript": "~3.9.3",
-        "vue": "^3.0.0-0"
-    },
-    "peerDependencies": {
-        "vue": "^3.0.0-0"
-    },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not dead"
-    ],
-    "externals": {
-        "vue": "vue"
-    },
-    "keywords": [
-        "vue",
-        "vue3",
-        "vuejs",
-        "plugin",
-        "toast",
-        "notification",
-        "notifications"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Daniel-Knights/vue-dk-toast"
-    }
+  "name": "vue-dk-toast",
+  "version": "2.2.1",
+  "private": false,
+  "description": "Lightweight toast notification plugin for Vue 3",
+  "author": "Daniel Knights",
+  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name dkToast ./src/lib/toast.ts && cp src/lib/toast.d.ts dist/toast.d.ts",
+    "pub": "npm version patch && npm publish",
+    "pub-minor": "npm version minor && npm publish",
+    "pub-major": "npm version major && npm publish"
+  },
+  "main": "dist/dkToast.umd.min.js",
+  "files": [
+    "dist/dkToast.umd.min.js",
+    "dist/toast.d.ts"
+  ],
+  "types": "dist/toast.d.ts",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "@vue/cli-plugin-babel": "~4.5.11",
+    "@vue/cli-plugin-eslint": "~4.5.11",
+    "@vue/cli-plugin-typescript": "^4.5.11",
+    "@vue/cli-service": "~4.5.11",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "core-js": "^3.8.3",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.5.0",
+    "prettier": "^2.2.1",
+    "typescript": "~3.9.3",
+    "vue": "^3.0.0-0"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0-0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "externals": {
+    "vue": "vue"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "vuejs",
+    "plugin",
+    "toast",
+    "notification",
+    "notifications"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Daniel-Knights/vue-dk-toast"
+  }
 }
