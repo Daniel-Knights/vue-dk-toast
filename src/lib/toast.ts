@@ -18,9 +18,10 @@ import renderToast from './render';
  * @property `styles` - CSS key/value pairs.
  */
 const toastPlugin = {
-  install: (app: App, options: Options): void => {
+  install: (app: App, passedOptions: Options): void => {
+    const options = passedOptions || {};
+
     // Set defaults
-    if (!options) options = {};
     if (!options.duration && options.duration !== false) options.duration = 5000;
     if (!options.positionY) options.positionY = 'bottom';
     if (!options.positionX) options.positionX = 'right';
@@ -28,14 +29,14 @@ const toastPlugin = {
     validateOptions(options);
     appendStylesheet(options);
     renderToast(app, options);
-  }
+  },
 };
 
 export default toastPlugin;
 
 // CDN compatibility
-// @ts-ignore
+// @ts-expect-error must check for presence of Vue on window
 if (window !== undefined && window.Vue) {
-  // @ts-ignore
+  // @ts-expect-error window must be assigned for CDN compatibility
   window.DKToast = toastPlugin;
 }

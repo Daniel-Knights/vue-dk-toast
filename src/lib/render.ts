@@ -48,7 +48,7 @@ function formatToastFromOptions(
   if (text) toast.textContent = text;
   // If left slot
   if (left) {
-    toast.innerHTML = `<div class="dk__icon-left">${left}</div>` + toast.innerHTML;
+    toast.innerHTML = `<div class="dk__icon-left">${left}</div>${toast.innerHTML}`;
   }
   // If right slot
   if (right) {
@@ -73,13 +73,14 @@ function toastPlugin(app: App, options: Options): void {
   setClassAndMount(container, 'dk__toast-container', document.body);
   setClassAndMount(mobileContainer, 'dk__toast-mobile-container', document.body);
 
-  function renderToast(text: string, localOptions?: LocalOptions): void {
-    if (!localOptions) localOptions = {};
-    if (!validateLocalOptions(text, localOptions)) return;
+  function renderToast(text: string, passedLocalOptions?: LocalOptions): void {
+    const localOptions = passedLocalOptions || {};
+
+    if (!localOptions || !validateLocalOptions(text, localOptions)) return;
 
     const positions = {
       y: localOptions.positionY || options.positionY,
-      x: localOptions.positionX || options.positionX
+      x: localOptions.positionX || options.positionX,
     };
 
     const section =
