@@ -5,25 +5,26 @@
 [![npm](https://img.shields.io/npm/v/vue-dk-toast.svg)](https://www.npmjs.com/package/vue-dk-toast)
 [![vue](https://img.shields.io/badge/vue-3.x-brightgreen)](https://v3.vuejs.org/)
 
--   _Lightweight_ ☁️
--   _Customizable_ 🧰
--   _Easy to use_ 🥷
--   _Mobile-friendly_ 📱
--   _Built-in TypeScript support_ 🔒
--   _A11y compliant_ 🧑‍🦯
+- _Lightweight_ ☁️
+- _Customizable_ 🧰
+- _Easy to use_ 🥷
+- _Mobile-friendly_ 📱
+- _Built-in TypeScript support_ 🔒
+- _A11y compliant_ 🧑‍🦯
 
 ---
 
 [**Demo**](https://vue-dk-toast.netlify.app/) \
 [**CodePen Demo**](https://codepen.io/daniel-knights/pen/NWbjRZZ)
 
--   [Install](#install)
--   [Import](#import)
--   [Usage](#usage)
--   [Options](#options)
--   [Local Options](#local-options)
--   [TypeScript Support](#typescript-support)
--   [Security](#security)
+- [`vue-dk-toast`](#vue-dk-toast)
+  - [Install](#install)
+  - [Import](#import)
+  - [Usage](#usage)
+  - [Options](#options)
+  - [Local Options](#local-options)
+  - [TypeScript Support](#typescript-support)
+  - [Security](#security)
 
 ```
       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -83,20 +84,20 @@ It's recommended you use a specific version number to guard against breaking cha
 CLI
 
 ```js
-import { createApp } from 'vue'
-import App from './App.vue'
-import DKToast from 'vue-dk-toast'
+import { createApp } from 'vue';
+import App from './App.vue';
+import DKToast from 'vue-dk-toast';
 
-createApp(App).use(DKToast).mount('#app')
+createApp(App).use(DKToast).mount('#app');
 ```
 
 CDN
 
 ```js
-const app = Vue.createApp({})
+const app = Vue.createApp({});
 
-app.use(DKToast)
-app.mount('#app')
+app.use(DKToast);
+app.mount('#app');
 ```
 
 ## Usage
@@ -104,7 +105,7 @@ app.mount('#app')
 **Options API:**
 
 ```js
-this.$toast('Simple!')
+this.$toast('Simple!');
 ```
 
 _or..._
@@ -117,15 +118,15 @@ _or..._
 
 ```vue
 <script>
-import { inject } from 'vue'
+import { inject } from 'vue';
 
 export default {
-    setup() {
-        const toast = inject('$toast')
+  setup() {
+    const toast = inject('$toast');
 
-        toast('Simple!')
-    }
-}
+    toast('Simple!');
+  },
+};
 </script>
 ```
 
@@ -145,20 +146,20 @@ export default {
 
 ```js
 createApp(App)
-    .use(DKToast, {
-        duration: 5000,
-        positionY: 'bottom', // 'top' or 'bottom'
-        positionX: 'right', // 'left', 'right' or 'center'
-        disableClick: true,
-        styles: {
-            color: '#000',
-            backgroundColor: '#fff'
-            // Vendor prefixes also supported
-        },
-        class: 'custom-class', // Added to each toast,
-        max: 10
-    })
-    .mount('#app')
+  .use(DKToast, {
+    duration: 5000,
+    positionY: 'bottom', // 'top' or 'bottom'
+    positionX: 'right', // 'left', 'right' or 'center'
+    disableClick: true,
+    styles: {
+      color: '#000',
+      backgroundColor: '#fff',
+      // Vendor prefixes also supported
+    },
+    class: 'custom-class', // Added to each toast,
+    max: 10,
+  })
+  .mount('#app');
 ```
 
 ## Local Options
@@ -180,23 +181,23 @@ createApp(App)
 
 ```js
 this.$toast('Simple!', {
-    duration: 1000,
-    styles: {
-        borderRadius: '25px'
-    },
-    link: {
-        href: 'https://vue-dk-toast.netlify.app/',
-        targetBlank: true
-    },
-    // Any valid HTML, intended for icons
-    slotLeft: '<i class="fa fa-user"></i>', // Add icon to left
-    slotRight: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
-    class: 'local-class', // Added to this toast only
-    type: 'success', // Default classes: 'success', 'error' and 'passive'
-    positionX: 'center',
-    positionY: 'top',
-    disableClick: true
-})
+  duration: 1000,
+  styles: {
+    borderRadius: '25px',
+  },
+  link: {
+    href: 'https://vue-dk-toast.netlify.app/',
+    targetBlank: true,
+  },
+  // Any valid HTML, intended for icons
+  slotLeft: '<i class="fa fa-user"></i>', // Add icon to left
+  slotRight: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
+  class: 'local-class', // Added to this toast only
+  type: 'success', // Default classes: 'success', 'error' and 'passive'
+  positionX: 'center',
+  positionY: 'top',
+  disableClick: true,
+});
 ```
 
 ## TypeScript Support
@@ -205,16 +206,16 @@ this.$toast('Simple!', {
 
 ```vue
 <script lang="ts">
-import { defineComponent, inject } from 'vue'
-import type { Toast } from 'vue-dk-toast'
+import { defineComponent, inject } from 'vue';
+import type { Toast } from 'vue-dk-toast';
 
 export default defineComponent({
-    setup() {
-        const toast = inject<Toast>('$toast')
+  setup() {
+    const toast = inject<Toast>('$toast');
 
-        if (toast) toast('Simple!')
-    }
-})
+    if (toast) toast('Simple!');
+  },
+});
 </script>
 ```
 
