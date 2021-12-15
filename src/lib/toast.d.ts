@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { ComponentCustomProperties, Plugin } from 'vue';
 
 declare module '@vue/runtime-core' {
@@ -59,13 +60,15 @@ export default DKToast;
  * Used for typing main plugin function.
  *
  * @example
+ * ```ts
  * import type { Toast } from 'vue-dk-toast'
  * ...
  * setup() {
- *     const toast = inject<Toast>('$toast')
+ *   const toast = inject<Toast>('$toast')
  *
- *     if (toast) toast('Simple!')
+ *   if (toast) toast('Simple!')
  * }
+ * ```
  */
 export type Toast = {
   (text: string, localOptions?: LocalOptions): void;

@@ -4,8 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-// eslint-disable-next-line
-import type { Toast } from './lib/toast.d';
+import type { Toast } from '../lib/toast.d';
 
 export default defineComponent({
   name: 'App',
@@ -19,11 +18,11 @@ export default defineComponent({
       // Error
       this.$toast('f', {
         disableClick: true,
-        positionY: 'bottom'
+        positionY: 'bottom',
       });
       this.$toast('y', {
         disableClick: true,
-        positionY: 'top'
+        positionY: 'top',
       });
       setTimeout(() => {
         this.$toast('text only');
@@ -32,13 +31,13 @@ export default defineComponent({
         this.$toast('text with options', {
           positionY: 'bottom',
           positionX: 'right',
-          disableClick: true
+          disableClick: true,
         });
       }, 2000);
       setTimeout(() => {
         this.$toast('long text long text long text long text long text long text', {
           positionY: 'bottom',
-          positionX: 'left'
+          positionX: 'left',
         });
       }, 3000);
       setTimeout(() => {
@@ -46,7 +45,7 @@ export default defineComponent({
           slot: '<i class="fa fa-thumbs-up"></i>',
           positionY: 'top',
           positionX: 'right',
-          styles: { color: 'blue' }
+          styles: { color: 'blue' },
         });
       }, 4000);
       setTimeout(() => {
@@ -54,55 +53,55 @@ export default defineComponent({
           slotLeft: '<i class="fa fa-thumbs-up"></i>',
           positionY: 'top',
           positionX: 'center',
-          duration: false
+          duration: false,
         });
       }, 5000);
       setTimeout(() => {
         this.$toast('text + right + left icon', {
           slotLeft: '<i class="fa fa-thumbs-up"></i>',
-          slotRight: '<i class="fa fa-thumbs-up"></i>'
+          slotRight: '<i class="fa fa-thumbs-up"></i>',
         });
       }, 6000);
       setTimeout(() => {
         this.$toast('', {
-          slotRight: '<i class="fa fa-thumbs-up"></i>'
+          slotRight: '<i class="fa fa-thumbs-up"></i>',
         });
       }, 7000);
       setTimeout(() => {
         this.$toast('', {
-          slotLeft: '<i class="fa fa-thumbs-up"></i>'
+          slotLeft: '<i class="fa fa-thumbs-up"></i>',
         });
       }, 8000);
       setTimeout(() => {
         this.$toast('', {
           slotLeft: '<i class="fa fa-thumbs-up"></i>',
-          slotRight: '<i class="fa fa-thumbs-up"></i>'
+          slotRight: '<i class="fa fa-thumbs-up"></i>',
         });
       }, 9000);
       setTimeout(() => {
         this.$toast('', {
           slotLeft: '<i class="fa fa-thumbs-up"></i>',
-          slotRight: '<span class="material-icons">thumb_up</span>'
+          slotRight: '<span class="material-icons">thumb_up</span>',
         });
       }, 10000);
       setTimeout(() => {
         this.$toast('mixed icons', {
           slotLeft: '<i class="fa fa-thumbs-up"></i>',
-          slotRight: '<span class="material-icons">thumb_up</span>'
+          slotRight: '<span class="material-icons">thumb_up</span>',
         });
       }, 11000);
       setTimeout(() => {
         this.$toast('ERROR: SOMETHING HAPPENED', {
           slotLeft: '<i class="fa fa-exclamation"></i>',
           slotRight: '<i class="fa fa-exclamation"></i>',
-          type: 'error'
+          type: 'error',
         });
       }, 12000);
       setTimeout(() => {
         this.$toast('SUCCESS: SOMETHING HAPPENED', {
           slotLeft: '<i class="fa fa-exclamation"></i>',
           slotRight: '<i class="fa fa-exclamation"></i>',
-          type: 'success'
+          type: 'success',
         });
       }, 13000);
       setTimeout(() => {
@@ -110,11 +109,11 @@ export default defineComponent({
           slotLeft: '<i class="fa fa-exclamation"></i>',
           slotRight: '<i class="fa fa-exclamation"></i>',
           type: 'passive',
-          class: 'test'
+          class: 'test',
         });
       }, 14000);
-    }
-  }
+    },
+  },
 });
 </script>
 
