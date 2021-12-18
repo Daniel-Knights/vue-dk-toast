@@ -1,8 +1,9 @@
 import type { App } from 'vue';
-import type { Options } from './types';
+import type { Options } from './toast.d';
 import { validateOptions } from './validate';
 import { appendStylesheet } from './styles';
 import renderToast from './render';
+import './toast.d';
 
 /**
  * @param options Optional global config for toast notifications.
@@ -35,12 +36,6 @@ const toastPlugin = {
 export default toastPlugin;
 
 // CDN compatibility
-declare global {
-  interface Window {
-    DKToast?: typeof toastPlugin;
-  }
-}
-
 if (window !== undefined && 'Vue' in window) {
   window.DKToast = toastPlugin;
 }

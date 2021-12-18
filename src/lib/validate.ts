@@ -1,4 +1,4 @@
-import type { Options, LocalOptions } from './types';
+import type { Options, LocalOptions } from './toast.d';
 
 export function validateOptions(options: Options): void {
   // Invalid position error-handling

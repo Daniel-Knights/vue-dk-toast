@@ -1,4 +1,4 @@
-import type { Options } from './types';
+import type { Options } from './toast.d';
 
 /** Minify CSS */
 function minify(styles: string): string {

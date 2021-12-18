@@ -1,5 +1,5 @@
 import type { App } from 'vue';
-import type { Options, LocalOptions } from './types';
+import type { Options, LocalOptions } from './toast.d';
 import { formatCssProperties } from './styles';
 import { validateLocalOptions } from './validate';
 
