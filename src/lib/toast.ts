@@ -18,7 +18,7 @@ import renderToast from './render';
  * @property `styles` - CSS key/value pairs.
  */
 const toastPlugin = {
-  install: (app: App, passedOptions: Options): void => {
+  install(app: App, passedOptions: Options): void {
     const options = passedOptions || {};
 
     // Set defaults
@@ -35,7 +35,12 @@ const toastPlugin = {
 export default toastPlugin;
 
 // CDN compatibility
+declare global {
+  interface Window {
+    DKToast?: typeof toastPlugin;
+  }
+}
+
 if (window !== undefined && 'Vue' in window) {
-  // @ts-expect-error window must be assigned for CDN compatibility
   window.DKToast = toastPlugin;
 }
