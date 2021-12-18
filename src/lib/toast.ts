@@ -35,8 +35,7 @@ const toastPlugin = {
 export default toastPlugin;
 
 // CDN compatibility
-// @ts-expect-error must check for presence of Vue on window
-if (window !== undefined && window.Vue) {
+if (window !== undefined && 'Vue' in window) {
   // @ts-expect-error window must be assigned for CDN compatibility
   window.DKToast = toastPlugin;
 }
