@@ -15,7 +15,7 @@ function formatToastFromOptions(
   options: Options,
   localOptions: LocalOptions,
   duration?: number | false
-): Element {
+): HTMLAnchorElement | HTMLDivElement {
   const toast = localOptions.link?.href
     ? document.createElement('a')
     : document.createElement('div');
@@ -57,7 +57,7 @@ function formatToastFromOptions(
   // If slot only
   if (!text && (left || right)) toast.classList.add('dk__icon-only');
 
-  const styles = localOptions.styles ? localOptions.styles : options.styles;
+  const styles = localOptions.styles || options.styles;
   toast.setAttribute('style', formatCssProperties(styles, duration));
 
   // Prevent hover styling
@@ -114,10 +114,7 @@ function toastPlugin(app: App, options: Options): void {
     }
 
     // Determine if duration is a number or false, local or global
-    const duration =
-      localOptions.duration || localOptions.duration === false
-        ? localOptions.duration
-        : options.duration;
+    const duration = localOptions.duration ?? options.duration;
 
     const toast = formatToastFromOptions(text, options, localOptions, duration);
     const mobileClone = toast.cloneNode(true);

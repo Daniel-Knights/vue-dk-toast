@@ -1,35 +1,41 @@
 import type { Options } from './toast.d';
 
+const animationDefault = 'dk__toast-in 0.15s';
+const animationIn = `animation: ${animationDefault}`;
+const animationOut = `${animationDefault} reverse forwards`;
+
 /** Minify CSS */
 function minify(styles: string): string {
   let selector = false;
   let value = false;
 
+  function mapStyleChar(char: string) {
+    // Retain spaces between selectors
+    // Determine start of selector
+    if (/[\.@#]/.test(char) && !value) {
+      selector = true;
+    }
+    // Determine end of selector
+    if (/[,\{]/.test(char) && selector) {
+      selector = false;
+    }
+
+    // Retain spaces between rules with multiple values
+    if (char === ':' && !selector) value = true;
+    if (char === ';' && !selector) value = false;
+
+    // Replace spaces and line-breaks
+    if (/\s/.test(char) && !selector && !value) return '';
+
+    return char;
+  }
+
   const minified = styles
     .split('')
-    .map((char) => {
-      // Retain spaces between selectors
-      // Determine start of selector
-      if ((char === '.' || char === '@' || char === '#') && !value) selector = true;
-      // Determine end of selector
-      if (selector && (char === ',' || char === '{')) selector = false;
-
-      // Retain spaces between rules with multiple values
-      if (char === ':' && !selector) value = true;
-      if (char === ';' && !selector) value = false;
-
-      // Replace spaces and line-breaks
-      if ((char === ' ' || char === '\n' || char === '\r') && !selector && !value) {
-        return '';
-      }
-
-      return char;
-    })
+    .map(mapStyleChar)
     .join('')
-    .split(' {')
-    .join('{')
-    .split(': ')
-    .join(':');
+    .replace(' {', '{')
+    .replace(': ', ':');
 
   return minified;
 }
@@ -41,37 +47,37 @@ export function formatCssProperties(
 ): string {
   const styles = passedStyles || {};
 
-  let formatted = Object.keys(styles)
-    .map((style) => {
-      const formattedName = style
-        .split('')
-        .map((letter, index) => {
-          // Vendor prefixes
-          const webkit = style.split('webkit')[0] === '';
-          const moz = style.split('moz')[0] === '';
-          const ms = style.split('ms')[0] === '';
+  function formatStyle(style: string) {
+    const formattedName = style
+      .split('')
+      .map((letter, index) => {
+        if (letter === '-') return letter;
 
-          if (letter === '-') return letter;
-          if ((webkit || moz || ms) && index === 0) return `-${letter.toLowerCase()}`;
-          if (letter === letter.toUpperCase()) return `-${letter.toLowerCase()}`;
+        const vendorPrefix = /^(?:webkit|moz|ms)/.test(style) && index === 0;
 
-          return letter;
-        })
-        .join('');
+        if (vendorPrefix || letter === letter.toUpperCase()) {
+          return `-${letter.toLowerCase()}`;
+        }
 
-      if (!styles) return;
-      return `${formattedName}: ${styles[style]};`;
-    })
-    .join('');
+        return letter;
+      })
+      .join('');
 
-  if (duration) {
-    // Calculate -0.15s from the end of duration for animating out
-    formatted += `animation-delay: 0s, ${duration / 1000 - 0.15}s;`;
-  } else {
-    formatted += 'animation: dk__toast-in 0.15s;';
+    return `${formattedName}: ${styles[style]};`;
   }
 
-  return formatted;
+  let formattedStyles = Object.keys(styles).map(formatStyle).join('');
+
+  if (duration) {
+    // Calculate -0.15s from the end of duration for delay before animating out
+    const animationDelay = duration / 1000 - 0.15;
+
+    formattedStyles += `${animationIn}, ${animationOut} ${animationDelay}s`;
+  } else {
+    formattedStyles += `${animationIn};`;
+  }
+
+  return formattedStyles;
 }
 
 /** Append minified stylesheet to document head */
@@ -82,7 +88,6 @@ export function appendStylesheet(options: Options): void {
 
   // Create stylesheet
   const stylesheet = document.createElement('style');
-
   stylesheet.type = 'text/css';
 
   // Stylesheet content
@@ -141,7 +146,6 @@ export function appendStylesheet(options: Options): void {
       -webkit-transition: opacity 0.25s;
       -o-transition: opacity 0.25s;
       transition: opacity 0.25s;
-      animation: dk__toast-in 0.15s, dk__toast-in 0.15s reverse forwards;
       ${properties || ''}
     }
     .dk__toast-top-left {
@@ -195,19 +199,22 @@ export function appendStylesheet(options: Options): void {
       left: unset;
       padding: 4px;
     }
-    .dk__toast.dk__click-disabled {
+    .dk__click-disabled {
       cursor: default;
       opacity: 1;
     }
-    .dk__toast.dk__error {
+    .dk__click-disabled:hover {
+      opacity: 1;
+    }
+    .dk__error {
       background-color: rgb(255, 0, 0);
       color: #fff;
     }
-    .dk__toast.dk__success {
+    .dk__success {
       background-color: rgb(31, 218, 56);
       color: #fff;
     }
-    .dk__toast.dk__passive {
+    .dk__passive {
       background-color: rgb(31, 59, 218);
       color: #fff;
     }
@@ -276,6 +283,5 @@ export function appendStylesheet(options: Options): void {
     }
   `);
 
-  // Append
   document.head.appendChild(stylesheet);
 }

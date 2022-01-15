@@ -1,22 +1,18 @@
 import type { Options, LocalOptions } from './toast.d';
 
+const logErr = (msg: string) => console.error(`vue-dk-toast [Error]: ${msg}`);
+const logWarn = (msg: string) => console.warn(`vue-dk-toast [Warn]: ${msg}`);
+
 export function validateOptions(options: Options): void {
+  console.log(options.positionX, options.positionY);
   // Invalid position error-handling
-  if (
-    options.positionX !== 'left' &&
-    options.positionX !== 'right' &&
-    options.positionX !== 'center'
-  ) {
-    // eslint-disable-next-line
-    console.error(
-      `vue-dk-toast [Error]: positionX must be either "left", "right" or "center", received "${options.positionX}"`
+  if (!/^(?:left|right|center)$/.test(options.positionX ?? '')) {
+    logErr(
+      `positionX must be either "left", "right" or "center", received "${options.positionX}"`
     );
   }
-  if (options.positionY !== 'top' && options.positionY !== 'bottom') {
-    // eslint-disable-next-line
-    console.error(
-      `vue-dk-toast [Error]: positionY must be either "top" or "bottom", received "${options.positionY}"`
-    );
+  if (!/^(?:top|bottom)$/.test(options.positionY ?? '')) {
+    logErr(`positionY must be either "top" or "bottom", received "${options.positionY}"`);
   }
 }
 
@@ -25,14 +21,12 @@ export function validateLocalOptions(text: string, options: LocalOptions): boole
 
   // Required text value
   if (!text && !options.slotLeft && !options.slotRight && !options.slot) {
-    // eslint-disable-next-line
-    console.error('vue-dk-toast [Error]: a text/slot value is required');
+    logErr('a text/slot value is required');
     valid = false;
   }
   // Slot deprecation warning
   if (options.slot) {
-    // eslint-disable-next-line
-    console.warn('vue-dk-toast [Warn]: slot is now deprecated. Use slotRight instead');
+    logWarn('slot is now deprecated. Use slotRight instead');
   }
 
   return valid;
