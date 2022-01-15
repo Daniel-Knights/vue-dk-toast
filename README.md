@@ -76,7 +76,7 @@ CDN
 It's recommended you use a specific version number to guard against breaking changes and load the script faster:
 
 ```html
-<script src="https://unpkg.com/vue-dk-toast@2.0.6"></script>
+<script src="https://unpkg.com/vue-dk-toast@3.0.0"></script>
 ```
 
 ## Import
@@ -85,8 +85,8 @@ CLI
 
 ```js
 import { createApp } from 'vue';
-import App from './App.vue';
 import DKToast from 'vue-dk-toast';
+import App from './App.vue';
 
 createApp(App).use(DKToast).mount('#app');
 ```
@@ -110,23 +110,23 @@ this.$toast('Simple!');
 
 _or..._
 
-```js
+```jsx
 @click="$toast('Simple!')"
 ```
 
 **Composition API:**
 
-```vue
+```html
 <script>
-import { inject } from 'vue';
+  import { inject } from 'vue';
 
-export default {
-  setup() {
-    const toast = inject('$toast');
+  export default {
+    setup() {
+      const toast = inject('$toast');
 
-    toast('Simple!');
-  },
-};
+      toast('Simple!');
+    },
+  };
 </script>
 ```
 
@@ -204,18 +204,18 @@ this.$toast('Simple!', {
 
 **`vue-dk-toast`** comes with it's own built-in types for most cases, the exception being with the Composition API:
 
-```vue
+```html
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
-import type { Toast } from 'vue-dk-toast';
+  import { defineComponent, inject } from 'vue';
+  import type { Toast } from 'vue-dk-toast';
 
-export default defineComponent({
-  setup() {
-    const toast = inject<Toast>('$toast');
+  export default defineComponent({
+    setup() {
+      const toast = inject<Toast>('$toast');
 
-    if (toast) toast('Simple!');
-  },
-});
+      if (toast) toast('Simple!');
+    },
+  });
 </script>
 ```
 

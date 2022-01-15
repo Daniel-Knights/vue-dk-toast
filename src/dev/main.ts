@@ -1,16 +1,19 @@
 import { createApp } from 'vue';
-import App from './App.vue';
 import DKToast from '../lib/toast';
+import type { Options } from '../lib/toast.d';
+import App from './App.vue';
 
 const app = createApp(App);
 
-app.use(DKToast, {
-  // duration: false,
+console.log(window.DKToast);
+const options: Options = {
+  duration: false,
   positionX: 'center',
   positionY: 'top',
   class: 'toast',
   max: 10,
   styles: { color: 'red' },
-});
+};
 
+app.use(window.DKToast || DKToast, options);
 app.mount('#app');
