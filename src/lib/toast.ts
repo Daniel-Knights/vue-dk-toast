@@ -4,6 +4,17 @@ import { validateOptions } from './validate';
 import { appendStylesheet } from './styles';
 import renderToast from './render';
 
+/**
+ * **Options:**
+ * @property `class` - Global class to be added to each toast.
+ * @property `disableClick` - Disable toast removal on click.
+ * @property `duration` - Time in milliseconds before hiding the toast notification,
+ * set to `false` for an indefinite duration.
+ * @property `max` - Max number of toasts allowed at any one time.
+ * @property `positionX` - 'left', 'right' or 'center'.
+ * @property `positionY` - 'top' or 'bottom'.
+ * @property `styles` - CSS key/value pairs.
+ */
 const toastPlugin = {
   install(app: App, globalOptions: Options): void {
     const options = globalOptions || {};
