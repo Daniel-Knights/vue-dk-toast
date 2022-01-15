@@ -4,7 +4,6 @@ const logErr = (msg: string) => console.error(`vue-dk-toast [Error]: ${msg}`);
 const logWarn = (msg: string) => console.warn(`vue-dk-toast [Warn]: ${msg}`);
 
 export function validateOptions(options: Options): void {
-  console.log(options.positionX, options.positionY);
   // Invalid position error-handling
   if (!/^(?:left|right|center)$/.test(options.positionX ?? '')) {
     logErr(
