@@ -35,8 +35,20 @@ function formatToastFromOptions(
 
   // Add classes
   toast.className = 'dk__toast';
-  if (options.class) toast.classList.add(...options.class.split(' '));
-  if (localOptions.class) toast.classList.add(...localOptions.class.split(' '));
+
+  function classHandler(opt: Options | LocalOptions): void {
+    if (!opt.class) return;
+
+    if (typeof opt.class === 'string') {
+      toast.classList.add(opt.class);
+    } else if (Array.isArray(opt.class)) {
+      toast.classList.add(...opt.class);
+    }
+  }
+
+  classHandler(options);
+  classHandler(localOptions);
+
   if (localOptions.type) toast.classList.add(`dk__${localOptions.type}`);
 
   // A11y attributes

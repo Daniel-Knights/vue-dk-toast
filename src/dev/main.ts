@@ -10,7 +10,7 @@ const options: Options = {
   duration: false,
   positionX: 'center',
   positionY: 'top',
-  class: 'toast test',
+  class: ['toast', 'test'],
   max: 10,
   styles: { color: 'red' },
 };

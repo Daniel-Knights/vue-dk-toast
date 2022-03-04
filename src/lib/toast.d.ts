@@ -44,7 +44,7 @@ declare global {
  * @property `styles` - CSS key/value pairs.
  */
 export interface Options {
-  class?: string;
+  class?: string | string[];
   disableClick?: boolean;
   duration?: number | false;
   max?: number;
@@ -67,7 +67,7 @@ export interface Options {
  * @property `type?: 'error' | 'success' | 'passive'`
  */
 export interface LocalOptions {
-  class?: string;
+  class?: string | string[];
   disableClick?: boolean;
   duration?: number | false;
   link?: { href: string; targetBlank?: boolean };

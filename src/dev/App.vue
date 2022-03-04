@@ -18,7 +18,7 @@ export default defineComponent({
         positionY: 'top',
         class: 'class',
       });
-      toast('provide - extra class', { class: 'class extra' });
+      toast('provide - extra class', { class: ['class', 'extra'] });
     }
   },
   methods: {
@@ -31,7 +31,7 @@ export default defineComponent({
       this.$toast('y', {
         disableClick: true,
         positionY: 'top',
-        class: 'toast extra',
+        class: ['this', 'another'],
       });
       setTimeout(() => {
         this.$toast('text only');
