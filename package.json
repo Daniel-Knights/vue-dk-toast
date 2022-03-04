@@ -9,9 +9,9 @@
     "dev": "vite --host",
     "build": "npm run checks && vite build",
     "checks": "eslint src && vue-tsc --noEmit",
-    "pub": "npm version patch && npm publish",
-    "pub-minor": "npm version minor && npm publish",
-    "pub-major": "npm version major && npm publish"
+    "pub": "npm run build && npm version patch && npm publish",
+    "pub-minor": "npm run build && npm version minor && npm publish",
+    "pub-major": "npm run build && npm version major && npm publish"
   },
   "main": "dist/dkToast.umd.min.js",
   "types": "dist/dkToast.d.ts",
