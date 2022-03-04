@@ -132,15 +132,15 @@ _or..._
 
 ## Options
 
-| Option         | Type      | Default  | Description                                                                                    |
-| -------------- | --------- | -------- | ---------------------------------------------------------------------------------------------- |
-| `class`        | `String`  | None     | Custom CSS class to be added to every toast (alongside `.dk__toast`).                          |
-| `disableClick` | `Boolean` | `false`  | Disable toast removal on click.                                                                |
-| `duration`     | `Number`  | `5000`   | Milliseconds before hiding toast.                                                              |
-| `max`          | `Number`  | None     | Max number of toasts allowed on the page at any one time. Removes oldest existing toast first. |
-| `positionX`    | `String`  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`.                       |
-| `positionY`    | `String`  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.                                  |
-| `styles`       | `Object`  | None     | CSS key/value pairs - supports vendor prefixes.                                                |
+| Option         | Type                   | Default  | Description                                                                                                             |
+| -------------- | ---------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `class`        | `String` \| `String[]` | None     | Custom CSS class to be added to every toast (alongside `.dk__toast`). Must be an array of strings for multiple classes. |
+| `disableClick` | `Boolean`              | `false`  | Disable toast removal on click.                                                                                         |
+| `duration`     | `Number`               | `5000`   | Milliseconds before hiding toast.                                                                                       |
+| `max`          | `Number`               | None     | Max number of toasts allowed on the page at any one time. Removes oldest existing toast first.                          |
+| `positionX`    | `String`               | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`.                                                |
+| `positionY`    | `String`               | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.                                                           |
+| `styles`       | `Object`               | None     | CSS key/value pairs - supports vendor prefixes.                                                                         |
 
 **EXAMPLE:**
 
@@ -166,7 +166,7 @@ createApp(App)
 
 | Option         | Type                                      | Default  | Description                                                                                                  |
 | -------------- | ----------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `class`        | `String`                                  | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class).     |
+| `class`        | `String` \| `String[]`                    | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class).     |
 | `disableClick` | `Boolean`                                 | `false`  | Disable individual toast removal on click.                                                                   |
 | `duration`     | `Number`                                  | `5000`   | Milliseconds before hiding toast. Overrides global `duration`.                                               |
 | `link`         | `{ href: string, targetBlank?: boolean }` | none     | Turns the toast into an `<a>` element which has a `href` of the one provided and optional `target="_blank"`. |
