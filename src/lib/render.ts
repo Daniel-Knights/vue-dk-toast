@@ -35,8 +35,8 @@ function formatToastFromOptions(
 
   // Add classes
   toast.className = 'dk__toast';
-  if (options.class) toast.classList.add(options.class);
-  if (localOptions.class) toast.classList.add(localOptions.class);
+  if (options.class) toast.classList.add(...options.class.split(' '));
+  if (localOptions.class) toast.classList.add(...localOptions.class.split(' '));
   if (localOptions.type) toast.classList.add(`dk__${localOptions.type}`);
 
   // A11y attributes

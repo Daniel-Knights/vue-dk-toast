@@ -11,7 +11,15 @@ export default defineComponent({
   setup() {
     const toast = inject<Toast>('$toast');
 
-    if (toast) toast('provide', { positionX: 'left', positionY: 'top' });
+    if (toast) {
+      toast('provide - text only');
+      toast('provide - with options', {
+        positionX: 'left',
+        positionY: 'top',
+        class: 'class',
+      });
+      toast('provide - extra class', { class: 'class extra' });
+    }
   },
   methods: {
     toast(): void {
@@ -23,7 +31,7 @@ export default defineComponent({
       this.$toast('y', {
         disableClick: true,
         positionY: 'top',
-        class: 'toast',
+        class: 'toast extra',
       });
       setTimeout(() => {
         this.$toast('text only');
