@@ -189,7 +189,6 @@ function toastPlugin(app: App, options: Options): void {
     const pauseOnHover = localOptions.pauseOnHover ?? options.pauseOnHover;
 
     if (pauseOnHover) {
-      console.log(localOptions, options);
       // Pause duration on mouseover
       toast.addEventListener('mouseover', () => {
         clearTimeout(timeoutId);
