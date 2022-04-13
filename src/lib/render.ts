@@ -1,6 +1,6 @@
 import type { App } from 'vue';
 import type { Options, LocalOptions } from './toast.d';
-import { formatCssProperties } from './styles';
+import { formatCssProperties, animDuration } from './styles';
 import { validateLocalOptions } from './validate';
 
 const toastQueue: Array<[Element, Element]> = [];
@@ -13,8 +13,7 @@ function setClassAndMount(el: Element, className: string, target: Element): void
 function formatToastFromOptions(
   text: string,
   options: Options,
-  localOptions: LocalOptions,
-  duration?: number | false
+  localOptions: LocalOptions
 ): HTMLAnchorElement | HTMLDivElement {
   const toast = localOptions.link?.href
     ? document.createElement('a')
@@ -70,7 +69,7 @@ function formatToastFromOptions(
   if (!text && (left || right)) toast.classList.add('dk__icon-only');
 
   const styles = localOptions.styles || options.styles;
-  toast.setAttribute('style', formatCssProperties(styles, duration));
+  toast.setAttribute('style', formatCssProperties(styles));
 
   // Prevent hover styling
   if (localOptions.disableClick) toast.classList.add('dk__click-disabled');
@@ -128,8 +127,13 @@ function toastPlugin(app: App, options: Options): void {
     // Determine if duration is a number or false, local or global
     const duration = localOptions.duration ?? options.duration;
 
-    const toast = formatToastFromOptions(text, options, localOptions, duration);
-    const mobileClone = toast.cloneNode(true);
+    const toast = formatToastFromOptions(text, options, localOptions);
+    const mobileClone = toast.cloneNode(true) as typeof toast;
+
+    const animInClass = 'dk__toast-anim--in';
+
+    toast.classList.add(animInClass);
+    mobileClone.classList.add(animInClass);
 
     // Prevent attempting to remove toast if it's been removed by click
     let clicked: boolean;
@@ -140,7 +144,7 @@ function toastPlugin(app: App, options: Options): void {
       if ([...section.children].includes(toast)) {
         section.removeChild(toast);
       }
-      if ([...mobileSection.children].includes(mobileClone as Element)) {
+      if ([...mobileSection.children].includes(mobileClone)) {
         mobileSection.removeChild(mobileClone);
       }
 
@@ -153,17 +157,52 @@ function toastPlugin(app: App, options: Options): void {
       mobileClone.addEventListener('click', removeToastPair);
     }
 
-    toastQueue.push([toast, mobileClone as Element]);
+    toastQueue.push([toast, mobileClone]);
     section.appendChild(toast);
     mobileSection.appendChild(mobileClone);
 
+    // Remove anim-in class once animation is complete
+    setTimeout(() => {
+      toast.classList.remove(animInClass);
+      mobileClone.classList.remove(animInClass);
+    }, animDuration);
+
     if (!duration) return;
 
-    setTimeout(() => {
-      if (clicked) return;
+    const startTime = Date.now();
+    const animOutClass = 'dk__toast-anim--out';
 
-      removeToastPair();
-    }, duration);
+    let timeoutId: number | undefined;
+    let elapsed = 0;
+
+    function removeToastPairTimeout(timeoutDuration: number) {
+      timeoutId = window.setTimeout(() => {
+        if (clicked) return;
+
+        toast.classList.add(animOutClass);
+        mobileClone.classList.add(animOutClass);
+
+        setTimeout(removeToastPair, animDuration);
+      }, timeoutDuration - animDuration);
+    }
+
+    const pauseOnHover = localOptions.pauseOnHover ?? options.pauseOnHover;
+
+    if (pauseOnHover) {
+      console.log(localOptions, options);
+      // Pause duration on mouseover
+      toast.addEventListener('mouseover', () => {
+        clearTimeout(timeoutId);
+
+        elapsed = Date.now() - startTime;
+      });
+      // Resume on mouseout
+      toast.addEventListener('mouseout', () => {
+        removeToastPairTimeout(duration - elapsed);
+      });
+    }
+
+    removeToastPairTimeout(duration);
   }
 
   app.config.globalProperties.$toast = renderToast;

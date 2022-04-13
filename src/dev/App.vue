@@ -18,7 +18,10 @@ export default defineComponent({
         positionY: 'top',
         class: 'class',
       });
-      toast('provide - extra class', { class: ['class', 'extra'] });
+      toast('provide - extra class', {
+        class: ['class', 'extra'],
+        pauseOnHover: false,
+      });
     }
   },
   methods: {

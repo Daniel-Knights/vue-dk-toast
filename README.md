@@ -76,7 +76,7 @@ CDN
 It's recommended you use a specific version number to guard against breaking changes and load the script faster:
 
 ```html
-<script src="https://unpkg.com/vue-dk-toast@3.0.0"></script>
+<script src="https://unpkg.com/vue-dk-toast@3.2.0"></script>
 ```
 
 ## Import
@@ -137,6 +137,7 @@ _or..._
 | `class`        | `String` \| `String[]` | None     | Custom CSS class to be added to every toast (alongside `.dk__toast`). Must be an array of strings for multiple classes. |
 | `disableClick` | `Boolean`              | `false`  | Disable toast removal on click.                                                                                         |
 | `duration`     | `Number`               | `5000`   | Milliseconds before hiding toast.                                                                                       |
+| `pauseOnHover` | `Boolean`              | `true`   | Pause toast duration on `mouseover`, resume on `mouseout`.                                                              |
 | `max`          | `Number`               | None     | Max number of toasts allowed on the page at any one time. Removes oldest existing toast first.                          |
 | `positionX`    | `String`               | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`.                                                |
 | `positionY`    | `String`               | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.                                                           |
@@ -148,9 +149,10 @@ _or..._
 createApp(App)
   .use(DKToast, {
     duration: 5000,
+    pauseOnHover: true,
     positionY: 'bottom', // 'top' or 'bottom'
     positionX: 'right', // 'left', 'right' or 'center'
-    disableClick: true,
+    disableClick: false,
     styles: {
       color: '#000',
       backgroundColor: '#fff',
@@ -164,14 +166,17 @@ createApp(App)
 
 ## Local Options
 
+Local options override global options where duplicate.
+
 | Option         | Type                                      | Default  | Description                                                                                                  |
 | -------------- | ----------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
 | `class`        | `String` \| `String[]`                    | None     | CSS class to be added to this toast only (alongside `.dk__toast` **and** any globally set custom-class).     |
 | `disableClick` | `Boolean`                                 | `false`  | Disable individual toast removal on click.                                                                   |
-| `duration`     | `Number`                                  | `5000`   | Milliseconds before hiding toast. Overrides global `duration`.                                               |
+| `duration`     | `Number`                                  | `5000`   | Milliseconds before hiding toast.                                                                            |
+| `pauseOnHover` | `Boolean`                                 | `true`   | Pause toast duration on `mouseover`, resume on `mouseout`.                                                   |
 | `link`         | `{ href: string, targetBlank?: boolean }` | none     | Turns the toast into an `<a>` element which has a `href` of the one provided and optional `target="_blank"`. |
-| `positionX`    | `String`                                  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`. Overrides global `positionX`.       |
-| `positionY`    | `String`                                  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`. Overrides global `positionY`.                  |
+| `positionX`    | `String`                                  | `right`  | Position of container on the X axis - `'left'`, `'right'` or `'center'`.                                     |
+| `positionY`    | `String`                                  | `bottom` | Position of container on the Y axis - `'top'`, or `'bottom'`.                                                |
 | `slotLeft`     | `String`                                  | None     | Any valid HTML as a string. Displays left of text.                                                           |
 | `slotRight`    | `String`                                  | None     | Any valid HTML as a string. Displays right of text.                                                          |
 | `styles`       | `Object`                                  | None     | CSS key/value pairs. Supports vendor prefixes.                                                               |
@@ -182,6 +187,7 @@ createApp(App)
 ```js
 this.$toast('Simple!', {
   duration: 1000,
+  pauseOnHover: false,
   styles: {
     borderRadius: '25px',
   },

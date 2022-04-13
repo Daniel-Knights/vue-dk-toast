@@ -10,6 +10,7 @@ import renderToast from './render';
  * @property `disableClick` - Disable toast removal on click.
  * @property `duration` - Time in milliseconds before hiding the toast notification,
  * set to `false` for an indefinite duration.
+ * @property `pauseOnHover` - Pause toast duration on `mouseover`, resume on `mouseout`.
  * @property `max` - Max number of toasts allowed at any one time.
  * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
@@ -20,8 +21,11 @@ const toastPlugin = {
     const options = globalOptions || {};
 
     // Set defaults
-    if (!options.duration && options.duration !== false) {
+    if (options.duration === undefined) {
       options.duration = 5000;
+    }
+    if (options.pauseOnHover === undefined) {
+      options.pauseOnHover = true;
     }
     if (!options.positionY) options.positionY = 'bottom';
     if (!options.positionX) options.positionX = 'right';

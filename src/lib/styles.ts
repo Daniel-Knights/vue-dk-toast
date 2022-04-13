@@ -1,8 +1,6 @@
 import type { Options } from './toast.d';
 
-const animationDefault = 'dk__toast-in 0.15s';
-const animationIn = `animation: ${animationDefault}`;
-const animationOut = `${animationDefault} reverse forwards`;
+export const animDuration = 150;
 
 /** Minify CSS */
 function minify(styles: string): string {
@@ -41,10 +39,7 @@ function minify(styles: string): string {
 }
 
 /** Format CSS from camelCase */
-export function formatCssProperties(
-  passedStyles?: Record<string, string>,
-  duration?: number | false
-): string {
+export function formatCssProperties(passedStyles?: Record<string, string>): string {
   const styles = passedStyles || {};
 
   function formatStyle(style: string) {
@@ -66,25 +61,15 @@ export function formatCssProperties(
     return `${formattedName}: ${styles[style]};`;
   }
 
-  let formattedStyles = Object.keys(styles).map(formatStyle).join('');
-
-  if (duration) {
-    // Calculate -0.15s from the end of duration for delay before animating out
-    const animationDelay = duration / 1000 - 0.15;
-
-    formattedStyles += `${animationIn}, ${animationOut} ${animationDelay}s`;
-  } else {
-    formattedStyles += `${animationIn};`;
-  }
-
-  return formattedStyles;
+  return Object.keys(styles).map(formatStyle).join('');
 }
 
 /** Append minified stylesheet to document head */
 export function appendStylesheet(options: Options): void {
-  const { duration, styles, positionY } = options;
+  const { styles, positionY } = options;
   // Format style properties/values
-  const properties = formatCssProperties(styles, duration);
+  const properties = formatCssProperties(styles);
+  const animationDefault = `animation: dk__toast-in ${animDuration / 1000}s`;
 
   // Create stylesheet
   const stylesheet = document.createElement('style');
@@ -147,6 +132,12 @@ export function appendStylesheet(options: Options): void {
       -o-transition: opacity 0.25s;
       transition: opacity 0.25s;
       ${properties || ''}
+    }
+    .dk__toast-anim--in {
+      ${animationDefault};
+    }
+    .dk__toast-anim--out {
+      ${animationDefault} reverse forwards;
     }
     .dk__toast-top-left {
       grid-area: top-left;

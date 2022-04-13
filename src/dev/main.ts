@@ -7,7 +7,8 @@ const app = createApp(App);
 
 console.log(window.DKToast);
 const options: Options = {
-  duration: false,
+  // duration: false,
+  // pauseOnHover: true,
   positionX: 'center',
   positionY: 'top',
   class: ['toast', 'test'],

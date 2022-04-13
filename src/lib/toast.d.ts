@@ -38,6 +38,7 @@ declare global {
  * @property `disableClick` - Disable toast removal on click.
  * @property `duration` - Time in milliseconds before hiding the toast notification,
  * set to `false` for an indefinite duration.
+ * @property `pauseOnHover` - Pause toast duration on `mouseover`, resume on `mouseout`.
  * @property `max` - Max number of toasts allowed at any one time.
  * @property `positionX` - 'left', 'right' or 'center'.
  * @property `positionY` - 'top' or 'bottom'.
@@ -47,6 +48,7 @@ export interface Options {
   class?: string | string[];
   disableClick?: boolean;
   duration?: number | false;
+  pauseOnHover?: boolean;
   max?: number;
   positionX?: 'left' | 'right' | 'center';
   positionY?: 'top' | 'bottom';
@@ -57,6 +59,7 @@ export interface Options {
  * @property `class?: string`
  * @property `disableClick?: boolean`
  * @property `duration?: number | false`
+ * @property `pauseOnHover: boolean`
  * @property `link?: { href: string; targetBlank?: boolean }`
  * @property `positionX?: 'left' | 'right' | 'center'`
  * @property `positionY?: 'top' | 'bottom'`
@@ -70,6 +73,7 @@ export interface LocalOptions {
   class?: string | string[];
   disableClick?: boolean;
   duration?: number | false;
+  pauseOnHover?: boolean;
   link?: { href: string; targetBlank?: boolean };
   positionX?: 'left' | 'right' | 'center';
   positionY?: 'top' | 'bottom';
@@ -89,6 +93,7 @@ export interface LocalOptions {
  * @property `disableClick` - Disable toast removal on click.
  * @property `duration` - Time in milliseconds before hiding the toast notification,
  * set to `false` for an indefinite duration.
+ * @property `pauseOnHover` - Pause toast duration on `mouseover`, resume on `mouseout`.
  * @property `link` - Object with `href` and `targetBlank` properties, turns the toast
  * into an `<a>` element which has a `href` of the one provided and optional `target="_blank"`.
  * @property `positionX` - 'left', 'right' or 'center'.
@@ -115,6 +120,7 @@ declare module '@vue/runtime-core' {
      * @property `disableClick` - Disable toast removal on click.
      * @property `duration` - Time in milliseconds before hiding the toast notification,
      * set to `false` for an indefinite duration.
+     * @property `pauseOnHover` - Pause toast duration on `mouseover`, resume on `mouseout`.
      * @property `link` - Object with `href` and `targetBlank` properties, turns the toast
      * into an `<a>` element which has a `href` of the one provided and optional `target="_blank"`.
      * @property `positionX` - 'left', 'right' or 'center'.
